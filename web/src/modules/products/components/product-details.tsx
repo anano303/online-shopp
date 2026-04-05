@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
-import { X } from "lucide-react"; // Added X icon for close button
+import { Loader2, X } from "lucide-react"; // Added X icon for close button
 import { motion, AnimatePresence } from "framer-motion";
 import "./productDetails.css";
 import "./videoTabs.css"; // Import new tabs styles
@@ -14,7 +14,7 @@ import { fetchWithAuth } from "@/lib/fetch-with-auth";
 import { Color, AgeGroupItem } from "@/types";
 
 import { toast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+
 
 import { ProductCard } from "./product-card";
 import { useCart } from "@/modules/cart/context/cart-context";
@@ -105,11 +105,11 @@ function AddToCartButton({
             position: "fixed",
             top: "20px",
             right: "20px",
-            backgroundColor: "#4CAF50",
-            color: "white",
+            backgroundColor: "var(--color-success)",
+            color: "var(--text-white)",
             padding: "15px 20px",
             borderRadius: "8px",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+            boxShadow: "0 4px 12px rgba(var(--shadow-rgb), 0.2)",
             zIndex: 9999,
             fontSize: "16px",
             fontWeight: "500",
@@ -295,7 +295,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     if (language === "en") {
       // Find the color in availableColors to get its English name
       const colorObj = availableColors.find(
-        (color) => color.name === colorName,
+        (color: Color) => color.name === colorName,
       );
       return colorObj?.nameEn || colorName;
     }
@@ -307,7 +307,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     if (language === "en") {
       // Find the age group in availableAgeGroups to get its English name
       const ageGroupObj = availableAgeGroups.find(
-        (ageGroup) => ageGroup.name === ageGroupName,
+        (ageGroup: AgeGroupItem) => ageGroup.name === ageGroupName,
       );
       return ageGroupObj?.nameEn || ageGroupName;
     }

@@ -114,11 +114,11 @@ export function BOGButton({ orderId, amount, orderNumber }: BOGButtonProps) {
         fontFamily: '"ALK Life", serif',
         fontSize: "18px",
         letterSpacing: "0.5px",
-        color: "black",
-        backgroundColor: " #f8d7da",
+        color: "var(--text-dark)",
+        backgroundColor: "color-mix(in srgb, var(--color-error), var(--text-white) 82%)",
         width: "100%",
         padding: "12px 24px",
-        border: "1px solid red",
+        border: "1px solid var(--color-error)",
         cursor: "pointer",
         transition: "background-color 0.3s, border-color 0.3s",
         display: "flex",
@@ -130,10 +130,10 @@ export function BOGButton({ orderId, amount, orderNumber }: BOGButtonProps) {
       <svg
         className="w-6 h-6"
         viewBox="0 0 24 24"
-        fill="black"
+        fill="var(--text-dark)"
         width={20}
         height={20}
-        color="green"
+        color="var(--color-success)"
       >
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
       </svg>

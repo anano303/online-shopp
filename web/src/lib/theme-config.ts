@@ -12,20 +12,52 @@ export type ThemeConfig = {
   badge: string;
 };
 
-export const THEME_STORAGE_KEY = "site-theme-config-v1";
+export const THEME_STORAGE_KEY = "site-theme-config-v2";
+
+// Known legacy (old green/orange) primary colors that should be replaced
+export const LEGACY_PRIMARY_COLORS = [
+  "#0f766e", // old default teal-green
+  "#4b5320", // olive
+  "#1b4332", // dark green
+  "#0f4c5c", // dark teal
+  "#7a3e00", // brown-orange
+  "#4caf50", // material green
+  "#22c55e", // lime green
+];
+
+export const LEGACY_ACCENT_COLORS = [
+  "#f97316", // old default orange
+  "#f48c06", // amber
+  "#ffb703", // yellow
+];
+
+export function isLegacyTheme(theme: ThemeConfig): boolean {
+  return (
+    LEGACY_PRIMARY_COLORS.includes(theme.primary.toLowerCase()) ||
+    LEGACY_ACCENT_COLORS.includes(theme.accent.toLowerCase())
+  );
+}
+
+export function isDefaultTheme(theme: ThemeConfig): boolean {
+  return (
+    theme.primary.toLowerCase() === DEFAULT_THEME.primary &&
+    theme.accent.toLowerCase() === DEFAULT_THEME.accent &&
+    theme.background.toLowerCase() === DEFAULT_THEME.background
+  );
+}
 
 export const DEFAULT_THEME: ThemeConfig = {
-  primary: "#4b5320",
-  accent: "#f48c06",
-  text: "#f5e9d1",
-  textSecondary: "#d9c9a3",
-  background: "#121212",
-  border: "#555555",
-  success: "#4caf50",
-  error: "#ff6b6b",
-  warning: "#ffc107",
-  info: "#007bff",
-  badge: "#ff6b6b",
+  primary: "#0891b2",
+  accent: "#ec4899",
+  text: "#f8fafc",
+  textSecondary: "#a0aec0",
+  background: "#0f172a",
+  border: "#64748b",
+  success: "#10b981",
+  error: "#ef4444",
+  warning: "#f59e0b",
+  info: "#06b6d4",
+  badge: "#ec4899",
 };
 
 function clamp(value: number, min: number, max: number): number {

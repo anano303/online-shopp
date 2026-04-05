@@ -1,0 +1,14 @@
+.shop-container.default {
+  width: min(1360px, calc(100% - 2rem));
+  margin: 1rem auto 2.4rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.shop-header {
+  border: 1px solid var(--border-light);
+  border-radius: 1rem;
+  background: var(--bg-surface-1);
+  padding: 1rem;
+  color: var(--text-light);
+}

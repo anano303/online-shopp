@@ -259,7 +259,7 @@ export function ReviewForm({ productId, onSuccess }: ReviewFormProps) {
             left: 0,
             width: "100vw",
             height: "100vh",
-            backgroundColor: "rgba(0, 0, 0, 0.85)",
+            backgroundColor: "rgba(var(--shadow-rgb), 0.85)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -272,12 +272,12 @@ export function ReviewForm({ productId, onSuccess }: ReviewFormProps) {
             onClick={(e) => e.stopPropagation()}
             style={{
               zIndex: 10000000,
-              backgroundColor: "#2e3440",
-              border: "2px solid #e6cd9f",
+              backgroundColor: "var(--bg-surface-2)",
+              border: "2px solid var(--border-light)",
               borderRadius: "12px",
               width: "90%",
               maxWidth: "450px",
-              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.5)",
+              boxShadow: "0 8px 32px rgba(var(--shadow-rgb), 0.5)",
               position: "relative",
               pointerEvents: "auto",
             }}

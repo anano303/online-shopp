@@ -1,0 +1,43 @@
+.logo-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo-text-lockup {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  text-transform: lowercase;
+  line-height: 1;
+}
+
+.logo-text-main {
+  color: var(--text-light);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+.logo-text-sub {
+  margin-top: 0.3rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.58rem;
+}
+
+.logo-edit-btn {
+  position: absolute;
+  right: -0.35rem;
+  bottom: -0.35rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-light);
+  background: var(--color-primary);
+  color: var(--text-white);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}

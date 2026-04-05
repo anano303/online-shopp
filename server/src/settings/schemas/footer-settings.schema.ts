@@ -50,7 +50,7 @@ export class FooterSettings {
   @Prop({ default: '#555555' })
   siteBorderColor: string;
 
-  @Prop({ default: '#4caf50' })
+  @Prop({ default: '#10b981' })
   siteSuccessColor: string;
 
   @Prop({ default: '#ff6b6b' })

@@ -1,0 +1,28 @@
+.video-container {
+  width: 100%;
+  background: var(--bg-surface-2);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.video-container iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: none;
+}
+
+.video-container > div {
+  width: 100%;
+}
+
+.video-container > div > div {
+  width: 100% !important;
+}
+
+@media (max-width: 768px) {
+  .video-container {
+    border-radius: 0.5rem;
+  }
+}

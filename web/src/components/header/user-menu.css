@@ -1,0 +1,95 @@
+.user-menu-container {
+  position: relative;
+}
+
+.button {
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface-2);
+  color: var(--text-light);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--border-secondary);
+}
+
+.username {
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.86rem;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  min-width: 220px;
+  border: 1px solid var(--border-light);
+  border-radius: 0.9rem;
+  background: var(--bg-surface-1);
+  box-shadow: 0 16px 32px rgba(var(--shadow-rgb), 0.3);
+  padding: 0.55rem;
+  z-index: 220;
+}
+
+.dropdown-label {
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 0.35rem 0.5rem;
+}
+
+.dropdown-menu hr {
+  border: 0;
+  border-top: 1px solid var(--border-secondary);
+  margin: 0.35rem 0;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-radius: 0.65rem;
+  background: transparent;
+  color: var(--text-light);
+  text-decoration: none;
+  padding: 0.55rem 0.55rem;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: var(--bg-hover);
+}
+
+.loader {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  border: 2px solid var(--border-light);
+  border-top-color: var(--color-accent);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

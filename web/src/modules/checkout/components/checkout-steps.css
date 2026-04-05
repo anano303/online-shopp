@@ -1,0 +1,125 @@
+.checkout-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.checkout-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.checkout-step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-surface-2);
+  border: 2px solid var(--border-light);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 200ms ease;
+}
+
+.checkout-step.active .checkout-step-number {
+  background: var(--color-primary);
+  color: var(--text-white);
+  border-color: var(--color-primary);
+}
+
+.checkout-step.completed .checkout-step-number {
+  background: var(--color-success);
+  color: var(--text-white);
+  border-color: var(--color-success);
+  font-size: 1.25rem;
+}
+
+.checkout-step-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color 200ms ease;
+}
+
+.checkout-step.active .checkout-step-label {
+  color: var(--color-primary);
+}
+
+.checkout-step.completed .checkout-step-label {
+  color: var(--color-success);
+}
+
+.checkout-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--border-light);
+  z-index: -1;
+}
+
+.checkout-step.completed:not(:last-child)::after {
+  background: var(--color-success);
+}
+
+@media (max-width: 768px) {
+  .checkout-steps {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .checkout-step {
+    gap: 0.5rem;
+  }
+
+  .checkout-step-number {
+    width: 36px;
+    height: 36px;
+    font-size: 0.875rem;
+  }
+
+  .checkout-step-label {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkout-steps {
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-bottom: none;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0;
+  }
+
+  .checkout-step {
+    flex: 1 0 calc(33.333% - 1rem);
+  }
+
+  .checkout-step:not(:last-child)::after {
+    display: none;
+  }
+
+  .checkout-step-number {
+    width: 32px;
+    height: 32px;
+    font-size: 0.75rem;
+  }
+
+  .checkout-step-label {
+    font-size: 0.65rem;
+  }
+}

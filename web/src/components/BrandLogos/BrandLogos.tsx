@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
@@ -10,18 +10,15 @@ import noPhoto from "../../assets/nophoto.webp";
 import { Product } from "@/types";
 import { useLanguage } from "@/hooks/LanguageContext";
 
-// Helper function to check if image is from Cloudinary
 const isCloudinaryImage = (src: string) =>
   src.includes("cloudinary") || src.includes("res.cloudinary.com");
 
-// Type for brand data
 interface Brand {
   name: string;
   logo?: string;
   products?: number;
 }
 
-// Fallback brand logos for brands without images
 const fallbackBrands = [
   "Remington",
   "Winchester",
@@ -36,24 +33,17 @@ const fallbackBrands = [
 ];
 
 const BrandLogos = () => {
-  const [isAnimationPaused, setIsAnimationPaused] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
   const [brands, setBrands] = useState<Brand[]>([]);
   const { t } = useLanguage();
 
-  // Fetch product data directly without relying on a separate brands endpoint
   const { data: productData, isLoading } = useQuery({
     queryKey: ["brandProductsData"],
     queryFn: async () => {
       try {
-        // Get a sample of products to extract brand info
         const response = await fetchWithAuth("/products?limit=50&page=1");
-        if (!response.ok) {
-          return { items: [] };
-        }
+        if (!response.ok) return { items: [] };
         return response.json();
-      } catch (err) {
-        console.error("Failed to fetch products for brand logos:", err);
+      } catch {
         return { items: [] };
       }
     },
@@ -61,201 +51,123 @@ const BrandLogos = () => {
     refetchOnWindowFocus: false,
   });
 
-  // Process brands data when products data is available
   useEffect(() => {
     if (productData?.items?.length) {
       const brandMap = new Map<string, Brand>();
 
-      // Process products to extract brands and logos
       productData.items.forEach((product: Product) => {
         if (product.brand) {
-          const currentBrand = brandMap.get(product.brand) || {
+          const current = brandMap.get(product.brand) || {
             name: product.brand,
             products: 0,
           };
 
-          // Use brandLogo if available, otherwise use first product image
-          if (product.brandLogo && !currentBrand.logo) {
+          if (product.brandLogo && !current.logo) {
             brandMap.set(product.brand, {
-              ...currentBrand,
+              ...current,
               logo: product.brandLogo,
-              products: (currentBrand.products || 0) + 1,
+              products: (current.products || 0) + 1,
             });
           } else if (
-            !currentBrand.logo &&
+            !current.logo &&
             product.images &&
             product.images.length > 0
           ) {
             brandMap.set(product.brand, {
-              ...currentBrand,
+              ...current,
               logo: product.images[0],
-              products: (currentBrand.products || 0) + 1,
+              products: (current.products || 0) + 1,
             });
           } else {
-            // Just increment product count
             brandMap.set(product.brand, {
-              ...currentBrand,
-              products: (currentBrand.products || 0) + 1,
+              ...current,
+              products: (current.products || 0) + 1,
             });
           }
         }
       });
 
-      // Add fallback brands if we don't have enough
       if (brandMap.size < 5) {
-        fallbackBrands.forEach((brandName) => {
-          if (!brandMap.has(brandName)) {
-            brandMap.set(brandName, { name: brandName, products: 0 });
+        fallbackBrands.forEach((name) => {
+          if (!brandMap.has(name)) {
+            brandMap.set(name, { name, products: 0 });
           }
         });
       }
 
-      // Convert map to array and sort by product count
-      const brandsArray = Array.from(brandMap.values())
-        .sort((a, b) => (b.products || 0) - (a.products || 0))
-        .slice(0, 10); // Limit to top 10 brands
-
-      setBrands(brandsArray);
-    } else if (
-      !isLoading &&
-      (!productData || !productData.items || productData.items.length === 0)
-    ) {
-      // If no products found, use fallback brands
-      const fallbackBrandsArray = fallbackBrands.map((name) => ({ name }));
-      setBrands(fallbackBrandsArray);
+      setBrands(
+        Array.from(brandMap.values())
+          .sort((a, b) => (b.products || 0) - (a.products || 0))
+          .slice(0, 10),
+      );
+    } else if (!isLoading) {
+      setBrands(fallbackBrands.map((name) => ({ name })));
     }
   }, [productData, isLoading]);
 
-  // Pause animation on hover
-  const pauseAnimation = () => setIsAnimationPaused(true);
-  const resumeAnimation = () => setIsAnimationPaused(false);
+  const getBrandUrl = (name: string) =>
+    `/shop?brand=${encodeURIComponent(name)}`;
 
-  // Generate brand URL
-  const getBrandUrl = (brandName: string) => {
-    return `/shop?brand=${encodeURIComponent(brandName)}`;
+  const renderLogo = (brand: Brand) => {
+    const src = brand.logo || noPhoto.src;
+    if (isCloudinaryImage(src)) {
+      return (
+        <img
+          src={src}
+          alt={`${brand.name}`}
+          className="bl-logo-img"
+        />
+      );
+    }
+    return (
+      <Image
+        src={src}
+        alt={`${brand.name}`}
+        width={80}
+        height={48}
+        className="bl-logo-img"
+      />
+    );
   };
 
-  // Observer for animation
-  useEffect(() => {
-    // Create intersection observer to start animation when in view
-    if (typeof window !== "undefined") {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("animate");
-            } else {
-              entry.target.classList.remove("animate");
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
+  if (isLoading) {
+    return (
+      <section className="bl-section">
+        <div className="bl-grid">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="bl-card bl-skeleton" />
+          ))}
+        </div>
+      </section>
+    );
+  }
 
-      if (containerRef.current) {
-        observer.observe(containerRef.current);
-      }
-
-      return () => {
-        if (containerRef.current) {
-          // eslint-disable-next-line react-hooks/exhaustive-deps
-          observer.unobserve(containerRef.current);
-        }
-      };
-    }
-  }, []);
+  if (!brands.length) return null;
 
   return (
-    <div className="brand-logos-section">
-      <div className="brand-logos-header">
-        <h2 className="brand-logos-title">{t("brand.ourPartners")}</h2>
-        <div className="brand-logos-subtitle">
-          {t("brand.brandSubtitle")}
-          {/* მაღალი ხარისხის ნადირობის აღჭურვილობა წამყვანი ბრენდებისგან */}
-        </div>
+    <section className="bl-section">
+      <div className="bl-header">
+        <span className="bl-badge">{t("brand.ourPartners")}</span>
       </div>
 
-      <div
-        ref={containerRef}
-        className={`brand-logos-container ${isAnimationPaused ? "paused" : ""}`}
-        onMouseEnter={pauseAnimation}
-        onMouseLeave={resumeAnimation}
-      >
-        {isLoading ? (
-          <div className="brand-logos-loading">ბრენდების ჩატვირთვა...</div>
-        ) : brands.length > 0 ? (
-          <div className="brand-logos-slider">
-            {/* First set of logos */}
-            {brands.map((brand, index) => (
-              <Link
-                key={`brand-${index}`}
-                href={getBrandUrl(brand.name)}
-                className="brand-logo-item"
-              >
-                <div className="brand-logo-wrapper">
-                  {isCloudinaryImage(brand.logo || noPhoto.src) ? (
-                    <img
-                      src={brand.logo || noPhoto.src}
-                      alt={`${brand.name} logo`}
-                      className="brand-logo-image"
-                      style={{
-                        width: "120px",
-                        height: "60px",
-                        objectFit: "contain",
-                      }}
-                    />
-                  ) : (
-                    <Image
-                      src={brand.logo || noPhoto.src}
-                      alt={`${brand.name} logo`}
-                      width={120}
-                      height={60}
-                      className="brand-logo-image"
-                    />
-                  )}
-                </div>
-                <div className="brand-name">{brand.name}</div>
-              </Link>
-            ))}
-
-            {/* Duplicate set for seamless loop */}
-            {brands.map((brand, index) => (
-              <Link
-                key={`brand-duplicate-${index}`}
-                href={getBrandUrl(brand.name)}
-                className="brand-logo-item"
-              >
-                <div className="brand-logo-wrapper">
-                  {isCloudinaryImage(brand.logo || noPhoto.src) ? (
-                    <img
-                      src={brand.logo || noPhoto.src}
-                      alt={`${brand.name} logo`}
-                      className="brand-logo-image"
-                      style={{
-                        width: "120px",
-                        height: "60px",
-                        objectFit: "contain",
-                      }}
-                    />
-                  ) : (
-                    <Image
-                      src={brand.logo || noPhoto.src}
-                      alt={`${brand.name} logo`}
-                      width={120}
-                      height={60}
-                      className="brand-logo-image"
-                    />
-                  )}
-                </div>
-                <div className="brand-name">{brand.name}</div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="brand-logos-loading">ბრენდები ვერ მოიძებნა</div>
-        )}
+      <div className="bl-grid">
+        {brands.map((brand, i) => (
+          <Link
+            key={brand.name + i}
+            href={getBrandUrl(brand.name)}
+            className="bl-card"
+          >
+            <div className="bl-logo-box">{renderLogo(brand)}</div>
+            <span className="bl-name">{brand.name}</span>
+            {brand.products ? (
+              <span className="bl-count">
+                {brand.products} {brand.products === 1 ? "item" : "items"}
+              </span>
+            ) : null}
+          </Link>
+        ))}
       </div>
-    </div>
+    </section>
   );
 };
 

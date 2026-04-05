@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Logo from "@/components/Logo/Logo";
 import { CartIcon } from "@/modules/cart/components/cart-icon";
 import "./header.scss";
 import UserMenu from "./user-menu";
@@ -10,6 +9,7 @@ import { LanguageSwitcher } from "@/components/language-switcher/language-switch
 import { useLanguage } from "@/hooks/LanguageContext";
 import { Home, ShoppingBag, Star, X, Mail } from "lucide-react";
 import SearchBox from "../SearchBox/search-box";
+import { ColorModeToggle } from "@/components/theme/ColorModeToggle";
 
 export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -27,19 +27,21 @@ export default function Header() {
     >
       <div className="header-container">
         <div className="logo-container">
-          <Logo
-            width={120}
-            height={50}
-            className="header-logo"
-            showEdit
-            linkTo="/"
-          />
+          <Link href="/" className="brand-wordmark" aria-label="Online Shop">
+            <span className="brand-main">online shop</span>
+            <span className="brand-sub">curated essentials</span>
+          </Link>
         </div>
 
         <div className="search-container">
           <div className="search-box">
             <SearchBox />
           </div>
+        </div>
+
+        <div className="desktop-controls">
+          <ColorModeToggle />
+          <LanguageSwitcher />
         </div>
 
         {/* Mobile Navigation Toggle */}
@@ -58,6 +60,7 @@ export default function Header() {
               <UserMenu onNavigate={() => setIsNavOpen(false)} />
             </div>
             <div className="language-switcher-container">
+              <ColorModeToggle />
               <LanguageSwitcher />
             </div>
             <button className="nav-close-btn" onClick={toggleNav}>
@@ -160,6 +163,7 @@ export default function Header() {
               </div>
               <CartIcon onNavigate={() => setIsNavOpen(false)} />
               <div className="language-switcher-container">
+                <ColorModeToggle />
                 <LanguageSwitcher />
               </div>
             </li>

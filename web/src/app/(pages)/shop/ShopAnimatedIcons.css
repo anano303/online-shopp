@@ -1,0 +1,13 @@
+.shop-icon-float {
+  animation: shopFloat 2.4s ease-in-out infinite;
+}
+
+@keyframes shopFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}

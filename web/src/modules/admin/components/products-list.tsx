@@ -327,16 +327,18 @@ export function ProductsList() {
             width: "250px",
             padding: "8px 12px",
             fontSize: "14px",
-            border: "1px solid #ccc",
+            border: "1px solid var(--border-light)",
             borderRadius: "6px",
             outline: "none",
             transition: "border-color 0.2s",
+            backgroundColor: "var(--bg-surface-2)",
+            color: "var(--text-light)",
           }}
-          onFocus={(e) => (e.target.style.borderColor = "#4b5320")}
-          onBlur={(e) => (e.target.style.borderColor = "#ccc")}
+          onFocus={(e) => (e.target.style.borderColor = "var(--color-primary)")}
+          onBlur={(e) => (e.target.style.borderColor = "var(--border-light)")}
         />
         {isFetching && (
-          <span style={{ fontSize: "12px", color: "#888" }}>
+          <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>
             {language === "ge" ? "იტვირთება..." : "Loading..."}
           </span>
         )}

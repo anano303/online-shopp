@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/api-client";
@@ -19,8 +18,6 @@ interface LogoProps {
   showEdit?: boolean;
   linkTo?: string;
 }
-
-const DEFAULT_LOGO = "/favicon.svg";
 
 export default function Logo({
   width = 140,
@@ -52,32 +49,15 @@ export default function Logo({
     staleTime: 10 * 60 * 1000,
   });
 
-  // Detect user's color scheme preference
-  const [prefersDark, setPrefersDark] = useState(true);
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    setPrefersDark(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setPrefersDark(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
-  const lightLogo = settings?.logoUrl || DEFAULT_LOGO;
-  const darkLogo = settings?.logoUrlDark || lightLogo;
-  const logoUrl = prefersDark ? darkLogo : lightLogo;
-
   const logoContent = (
     <span className={`logo-wrapper ${className}`}>
-      <Image
-        src={logoUrl}
-        alt="13 - ცამეტი"
-        width={width}
-        height={height}
-        className="logo-image"
-        priority
-        unoptimized={logoUrl.includes("cloudinary") || logoUrl.endsWith(".svg")}
-      />
+      <span
+        className="logo-text-lockup"
+        style={{ minWidth: width, minHeight: Math.max(height - 8, 34) }}
+      >
+        <span className="logo-text-main">online shop</span>
+        <span className="logo-text-sub">your premium store</span>
+      </span>
       {isAdmin && showEdit && (
         <button
           className="logo-edit-btn"

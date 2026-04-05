@@ -68,45 +68,45 @@ const BORDER_PALETTE = [
   "#334155",
 ];
 const SUCCESS_PALETTE = [
-  "#4caf50",
-  "#2a9d8f",
-  "#43aa8b",
-  "#38b000",
-  "#00a878",
-  "#52b788",
+  "#10b981",
+  "#059669",
+  "#047857",
+  "#065f46",
+  "#064e3b",
+  "#f0fdf4",
 ];
 const ERROR_PALETTE = [
-  "#ff6b6b",
-  "#ef476f",
-  "#d62828",
-  "#e63946",
-  "#f94144",
-  "#c1121f",
+  "#ef4444",
+  "#dc2626",
+  "#b91c1c",
+  "#991b1b",
+  "#7f1d1d",
+  "#fef2f2",
 ];
 const WARNING_PALETTE = [
-  "#ffc107",
-  "#ffb703",
-  "#f4a261",
-  "#ff9f1c",
-  "#ffd166",
-  "#e9c46a",
+  "#f59e0b",
+  "#d97706",
+  "#b45309",
+  "#92400e",
+  "#78350f",
+  "#fffbeb",
 ];
 const INFO_PALETTE = [
-  "#007bff",
-  "#4cc9f0",
-  "#4895ef",
-  "#4361ee",
-  "#00b4d8",
-  "#3a86ff",
+  "#06b6d4",
+  "#0891b2",
+  "#0e7490",
+  "#164e63",
+  "#0c4a6e",
+  "#ecf0f1",
 ];
 
 const BADGE_PALETTE = [
-  "#ff6b6b",
-  "#ef476f",
-  "#d62828",
-  "#e63946",
-  "#f94144",
-  "#c1121f",
+  "#ec4899",
+  "#db2777",
+  "#be185d",
+  "#9d174d",
+  "#831843",
+  "#fce7f3",
 ];
 
 function sanitizeHex(input: string): string {
@@ -663,7 +663,7 @@ export default function AdminThemePage() {
               type="text"
               value={success}
               onChange={(e) => updateSuccess(e.target.value)}
-              placeholder="#4caf50"
+              placeholder="#10b981"
             />
           </div>
           <div className={styles["palette"]}>

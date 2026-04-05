@@ -1,0 +1,117 @@
+.homePageShop {
+  width: 100%;
+  padding: clamp(2rem, 5vw, 4rem) 0;
+  background: var(--bg-body);
+}
+
+.shop-container {
+  width: min(1400px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.product-sections {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.product-section {
+  border: 1px solid var(--border-light);
+  border-radius: 1rem;
+  padding: clamp(1rem, 3vw, 2rem);
+  background: var(--bg-surface-1);
+  box-shadow: 0 4px 12px rgba(var(--shadow-rgb), 0.1);
+  transition: all 300ms ease;
+}
+
+.product-section:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 24px rgba(var(--shadow-rgb), 0.15);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  margin: 0;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+.see-more-btn {
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface-2);
+  color: var(--color-primary);
+  border-radius: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 200ms ease;
+  font-size: 0.9rem;
+}
+
+.see-more-btn:hover {
+  background: var(--color-primary);
+  color: var(--text-white);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.loading-container,
+.empty-state {
+  border: 2px dashed var(--border-light);
+  border-radius: 0.75rem;
+  background: var(--bg-surface-2);
+  color: var(--text-secondary);
+  min-height: 200px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.95rem;
+}
+
+.see-more-mobile {
+  display: none;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.see-more-mobile .see-more-btn {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .homePageShop {
+    padding: 1.5rem 0;
+  }
+
+  .shop-container {
+    width: calc(100% - 1rem);
+  }
+
+  .product-section {
+    padding: clamp(0.75rem, 2vw, 1.25rem);
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .see-more-desktop {
+    display: none;
+  }
+
+  .see-more-mobile {
+    display: block;
+  }
+}

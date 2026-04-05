@@ -19,9 +19,9 @@ const paginationStyles = `
   }
   
   .pagination-button {
-    background: #f8f9fa;
-    border: 1px solid #dee2e6;
-    color: #212529;
+    background: var(--bg-surface-2);
+    border: 1px solid var(--border-light);
+    color: var(--text-light);
     padding: 0.5rem 1rem;
     margin: 0 0.25rem;
     border-radius: 4px;
@@ -31,7 +31,7 @@ const paginationStyles = `
   }
   
   .pagination-button:hover {
-    background: #e9ecef;
+    background: var(--bg-hover);
   }
   
   .pagination-button:disabled {
@@ -43,7 +43,7 @@ const paginationStyles = `
     margin: 0 1rem;
     display: flex;
     align-items: center;
-    color: #6c757d;
+    color: var(--text-secondary);
   }
 `;
 

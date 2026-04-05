@@ -1,0 +1,119 @@
+/* ============================================================
+   Category Navigation — sticky horizontal scroll strip
+   ============================================================ */
+
+.category-navigation {
+  width: 100%;
+  background: var(--bg-surface-1);
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ── Scrollable container ── */
+.category-scroll-container {
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE/Edge */
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  cursor: grab;
+  user-select: none;
+}
+
+.category-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Each category pill ── */
+.main-category-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface-2);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 200ms ease;
+  cursor: pointer;
+}
+
+.main-category-item:hover {
+  border-color: var(--color-primary);
+  background: rgba(var(--color-primary-rgb), 0.08);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.main-category-item.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--text-white);
+  box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.3);
+}
+
+/* ── Icon wrapper ── */
+.category-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.category-icon .icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+/* ── Text label ── */
+.category-text {
+  line-height: 1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .category-scroll-container {
+    padding: 0.5rem 0.75rem;
+    gap: 0.2rem;
+  }
+
+  .main-category-item {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .category-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-category-item {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .category-icon {
+    width: 16px;
+    height: 16px;
+    font-size: 0.9rem;
+  }
+}

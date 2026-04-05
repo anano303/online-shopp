@@ -1,0 +1,37 @@
+.cart-icon-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface-2);
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+}
+
+.shopping-cart-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.cart-text {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.cartIconsSpan {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.3rem;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--color-accent);
+  color: var(--text-white);
+  font-size: 0.64rem;
+  font-weight: 700;
+}

@@ -1,104 +1,145 @@
-.modal-overlay {
+.create-user-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(var(--shadow-rgb), 0.5);
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 50;
+  background: rgba(var(--shadow-rgb), 0.5);
+  z-index: 1000;
+  padding: 1rem;
 }
 
 .modal-content {
-  background-color: var(--bg-surface-2);
-  padding: 2rem;
-  border-radius: 12px;
-  width: 90%;
+  width: 100%;
   max-width: 500px;
-  box-shadow: 0 8px 20px rgba(var(--shadow-rgb), 0.25);
-  color: var(--text-light);
-  font-family: 'Georgia', serif;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-light);
+  box-shadow: 0 24px 60px rgba(var(--shadow-rgb), 0.3);
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
-.modal-content h2 {
-  margin-bottom: 1.5rem;
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.modal-title {
   font-size: 1.5rem;
-  font-weight: normal;
+  font-weight: 800;
   color: var(--text-light);
-  letter-spacing: 1px;
-  font-family: 'Playfair Display', serif;
-  text-align: center;
-  border-bottom: 2px solid var(--border-light);
-  padding-bottom: 0.75rem;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: color 200ms ease;
+}
+
+.modal-close:hover {
+  color: var(--text-light);
 }
 
 .form-group {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
-.form-group label {
+.form-label {
   display: block;
   margin-bottom: 0.5rem;
   color: var(--text-light);
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
-.form-group input,
-.form-group select {
+.form-input,
+.form-select {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--border-secondary);
-  border-radius: 6px;
-  background-color: var(--bg-surface-2);
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+  background: var(--bg-surface-2);
   color: var(--text-light);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 200ms ease;
+  box-sizing: border-box;
 }
 
-.form-group input:focus,
-.form-group select:focus {
+.form-input:focus,
+.form-select:focus {
   outline: none;
-  border-color: var(--text-light);
-  box-shadow: 0 0 0 2px rgba(var(--shadow-rgb), 0.25);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
 }
 
-.modal-actions {
+.form-actions {
   display: flex;
-  justify-content: flex-end;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
-.submit-btn, 
-.cancel-btn {
+.action-button {
+  flex: 1;
   padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 500;
+  border-radius: 0.5rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.submit-btn {
-  background-color: var(--bg-surface-2);
-  color: var(--text-white);
+  transition: all 200ms ease;
   border: none;
+  font-size: 0.95rem;
 }
 
-.submit-btn:hover {
-  background-color: var(--bg-surface-2);
+.primary-button {
+  background: var(--color-primary-gradient);
+  color: var(--text-white);
+}
+
+.primary-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(var(--shadow-rgb), 0.25);
+  box-shadow: 0 8px 16px rgba(var(--color-primary-rgb), 0.3);
 }
 
-.cancel-btn {
-  background-color: var(--bg-surface-2);
+.secondary-button {
+  background: var(--bg-surface-2);
   color: var(--text-light);
-  border: 1px solid var(--border-secondary);
+  border: 1px solid var(--border-light);
 }
 
-.cancel-btn:hover {
-  background-color: var(--bg-surface-2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(var(--shadow-rgb), 0.25);
+.secondary-button:hover {
+  border-color: var(--color-primary);
+  background: rgba(var(--color-primary-rgb), 0.05);
+}
+
+.error-message {
+  padding: 0.75rem 1rem;
+  background: rgba(var(--color-error), 0.1);
+  border: 1px solid var(--color-error);
+  border-radius: 0.5rem;
+  color: var(--color-error);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .create-user-modal {
+    padding: 0;
+  }
+
+  .modal-content {
+    border-radius: 1rem 1rem 0 0;
+    max-height: 100vh;
+  }
+
+  .modal-title {
+    font-size: 1.3rem;
+  }
 }

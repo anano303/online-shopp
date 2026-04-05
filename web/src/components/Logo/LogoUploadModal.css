@@ -1,0 +1,219 @@
+.logo-upload-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(var(--shadow-rgb), 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.logo-upload-modal-content {
+  background: var(--bg-surface-1);
+  border-radius: 1rem;
+  border: 1px solid var(--border-light);
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(var(--shadow-rgb), 0.3);
+}
+
+.logo-upload-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.logo-upload-modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.logo-upload-modal-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--bg-surface-2);
+  border-radius: 50%;
+  color: var(--text-light);
+  cursor: pointer;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms ease;
+}
+
+.logo-upload-modal-close:hover {
+  background: var(--color-error);
+  color: var(--text-white);
+}
+
+.logo-upload-zone {
+  border: 2px dashed var(--border-light);
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  transition: all 200ms ease;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+
+.logo-upload-zone:hover {
+  border-color: var(--color-primary);
+  background: rgba(var(--primary-rgb), 0.05);
+}
+
+.logo-upload-zone.drag-over {
+  border-color: var(--color-primary);
+  background: rgba(var(--primary-rgb), 0.1);
+}
+
+.logo-upload-zone-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.logo-upload-zone-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin: 0 0 0.25rem 0;
+}
+
+.logo-upload-zone-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.logo-upload-zone-input {
+  display: none;
+}
+
+.logo-upload-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.logo-upload-preview-image {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-light);
+}
+
+.logo-upload-info {
+  background: var(--bg-surface-2);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.logo-upload-group {
+  margin-bottom: 1rem;
+}
+
+.logo-upload-group:last-of-type {
+  margin-bottom: 0;
+}
+
+.logo-upload-label {
+  display: block;
+  color: var(--text-light);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.logo-upload-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-light);
+  border-radius: 0.375rem;
+  background: var(--bg-surface-2);
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.logo-upload-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+.logo-upload-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.logo-upload-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 200ms ease;
+  font-size: 0.95rem;
+}
+
+.logo-upload-btn-submit {
+  background: var(--color-primary);
+  color: var(--text-white);
+}
+
+.logo-upload-btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2);
+}
+
+.logo-upload-btn-cancel {
+  background: var(--bg-surface-2);
+  color: var(--text-light);
+  border: 1px solid var(--border-light);
+}
+
+.logo-upload-btn-cancel:hover {
+  border-color: var(--color-primary);
+}
+
+.logo-upload-error {
+  color: var(--color-error);
+  background: var(--bg-error);
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .logo-upload-modal-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .logo-upload-zone {
+    padding: 1.5rem 1rem;
+  }
+
+  .logo-upload-buttons {
+    flex-direction: column;
+  }
+
+  .logo-upload-btn {
+    width: 100%;
+  }
+}

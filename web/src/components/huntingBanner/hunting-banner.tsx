@@ -177,7 +177,7 @@ const BannerEditModal: React.FC<{
                   maxHeight: "150px",
                   objectFit: "contain",
                   borderRadius: "4px",
-                  border: "1px solid #555",
+                  border: "1px solid var(--border-light)",
                 }}
               />
             </div>

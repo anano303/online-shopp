@@ -1,0 +1,384 @@
+/* ══════════════════════════════════════════
+   Hunting Banners — Promotional Sections
+   ══════════════════════════════════════════ */
+
+.hunting-banner-container {
+  width: min(1360px, calc(100% - 1.5rem));
+  margin: 0 auto;
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+}
+
+/* ── Loading state ── */
+.hunting-banner-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--text-secondary);
+}
+
+.spin-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Content banner (image + text side-by-side) ── */
+.hunting-banner-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-light);
+  min-height: 240px;
+  transition: all 300ms ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.hunting-banner-content.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hunting-banner-content:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 32px rgba(var(--shadow-rgb), 0.15);
+}
+
+.hunting-banner-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.hunting-banner-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block;
+  transition: transform 400ms ease;
+}
+
+.hunting-banner-content:hover .hunting-banner-image img {
+  transform: scale(1.04);
+}
+
+.hunting-banner-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  gap: 1.25rem;
+}
+
+.hunting-banner-text h2 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+  font-weight: 800;
+  color: var(--text-light);
+  line-height: 1.2;
+}
+
+/* ── Footer-style banner (full-width background image) ── */
+.hunting-banner-footer {
+  border-radius: 1rem;
+  overflow: hidden;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(2rem, 4vw, 3.5rem) 1.5rem;
+  gap: 1.25rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 300ms ease;
+}
+
+.hunting-banner-footer.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hunting-banner-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+  z-index: 0;
+}
+
+.hunting-banner-footer h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  max-width: 600px;
+  line-height: 1.2;
+}
+
+/* ── CTA Button (shared for both banner types) ── */
+.hunting-banner-button {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--color-accent);
+  color: #fff;
+  padding: 0.7rem 1.75rem;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 200ms ease;
+  box-shadow: 0 4px 16px rgba(var(--accent-rgb), 0.3);
+}
+
+.hunting-banner-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.45);
+}
+
+/* ── Admin edit button ── */
+.admin-edit-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 200ms ease;
+  backdrop-filter: blur(4px);
+}
+
+.hunting-banner-content:hover .admin-edit-button,
+.hunting-banner-footer:hover .admin-edit-button {
+  opacity: 1;
+}
+
+.admin-edit-button:hover {
+  background: var(--color-primary);
+  transform: scale(1.1);
+}
+
+/* ── Banner Edit Modal ── */
+.banner-edit-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.banner-edit-modal {
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-light);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  width: 100%;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 48px rgba(var(--shadow-rgb), 0.4);
+}
+
+.banner-edit-modal h3 {
+  margin: 0 0 1.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+.banner-edit-form {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.banner-edit-form label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.banner-edit-form input[type="text"] {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+  background: var(--bg-surface-2);
+  color: var(--text-light);
+  font-size: 0.9rem;
+  transition: border-color 200ms ease;
+}
+
+.banner-edit-form input[type="text"]:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.banner-image-upload-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.upload-divider {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.banner-upload-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 1rem;
+  border: 1px dashed var(--border-light);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.banner-upload-button:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.banner-image-preview {
+  margin-top: 0.25rem;
+}
+
+.banner-image-preview p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0 0 0.4rem;
+}
+
+.banner-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.banner-edit-cancel,
+.banner-edit-save {
+  padding: 0.55rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 200ms ease;
+  border: none;
+}
+
+.banner-edit-cancel {
+  background: var(--bg-surface-2);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+}
+
+.banner-edit-cancel:hover {
+  border-color: var(--text-secondary);
+}
+
+.banner-edit-save {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.banner-edit-save:hover {
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.35);
+}
+
+.banner-edit-save:disabled,
+.banner-edit-cancel:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .hunting-banner-container {
+    width: calc(100% - 1rem);
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .hunting-banner-content {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .hunting-banner-image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .hunting-banner-text {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .hunting-banner-footer {
+    min-height: 200px;
+    padding: 1.5rem 1rem;
+  }
+
+  .admin-edit-button {
+    opacity: 1;
+  }
+
+  .banner-edit-modal {
+    padding: 1.25rem;
+    max-width: calc(100vw - 2rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .hunting-banner-text h2 {
+    font-size: 1.1rem;
+  }
+
+  .hunting-banner-footer h2 {
+    font-size: 1.15rem;
+  }
+
+  .hunting-banner-button {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.8rem;
+  }
+}

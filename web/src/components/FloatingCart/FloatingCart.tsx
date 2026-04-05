@@ -236,14 +236,16 @@ export function FloatingCart() {
                         style={{
                           width: "50px",
                           height: "50px",
-                          backgroundColor: "#f3f4f6",
+                          backgroundColor: "var(--bg-surface-3)",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                           borderRadius: "4px",
                         }}
                       >
-                        <span style={{ color: "#9ca3af", fontSize: "12px" }}>
+                        <span
+                          style={{ color: "var(--text-secondary)", fontSize: "12px" }}
+                        >
                           No Image
                         </span>
                       </div>

@@ -103,8 +103,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" data-color-mode="dark" suppressHydrationWarning>
       <head>
+        {/* Blocking color-mode script — runs before first paint to prevent FOUC */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var m=localStorage.getItem("site-color-mode-v1");if(m==="light"||m==="dark"){document.documentElement.setAttribute("data-color-mode",m)}else{document.documentElement.setAttribute("data-color-mode","dark")}}catch(e){document.documentElement.setAttribute("data-color-mode","dark")}})()`,
+          }}
+        />
         {/* Favicon links */}
         <link rel="icon" href="/api/logo" />
         <link rel="apple-touch-icon" href="/api/logo" />

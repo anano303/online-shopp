@@ -1,0 +1,100 @@
+.share-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.share-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface-2);
+  cursor: pointer;
+  transition: all 200ms ease;
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+.share-button:hover {
+  border-color: var(--color-primary);
+  background: rgba(var(--primary-rgb), 0.1);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.share-button.facebook {
+  color: #1877f2;
+}
+
+.share-button.facebook:hover {
+  background: rgba(24, 119, 242, 0.1);
+  border-color: #1877f2;
+}
+
+.share-button.twitter {
+  color: #1da1f2;
+}
+
+.share-button.twitter:hover {
+  background: rgba(29, 161, 242, 0.1);
+  border-color: #1da1f2;
+}
+
+.share-button.whatsapp {
+  color: #25d366;
+}
+
+.share-button.whatsapp:hover {
+  background: rgba(37, 211, 102, 0.1);
+  border-color: #25d366;
+}
+
+.share-button.telegram {
+  color: #0088cc;
+}
+
+.share-button.telegram:hover {
+  background: rgba(0, 136, 204, 0.1);
+  border-color: #0088cc;
+}
+
+.share-button.email {
+  color: var(--color-accent);
+}
+
+.share-button.email:hover {
+  background: rgba(var(--accent-rgb), 0.1);
+  border-color: var(--color-accent);
+}
+
+.share-button.copy {
+  color: var(--text-secondary);
+}
+
+.share-button.copy:hover {
+  background: var(--bg-surface-3);
+  border-color: var(--text-secondary);
+}
+
+.share-button.copied {
+  background: var(--color-success);
+  color: var(--text-white);
+  border-color: var(--color-success);
+}
+
+@media (max-width: 480px) {
+  .share-buttons {
+    gap: 0.5rem;
+  }
+
+  .share-button {
+    width: 36px;
+    height: 36px;
+    font-size: 0.875rem;
+  }
+}

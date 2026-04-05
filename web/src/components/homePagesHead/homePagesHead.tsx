@@ -99,13 +99,13 @@ const HomePagesHead = () => {
   const backgroundStyle =
     !isLoading && currentBanner && currentBanner.imageUrl
       ? {
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), url(${currentBanner.imageUrl})`,
+          backgroundImage: `var(--hero-overlay), url(${currentBanner.imageUrl})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           opacity: 1,
         }
       : {
-          backgroundColor: "rgba(30, 30, 30, 1)", // Dark background instead of image
+          backgroundColor: "var(--bg-surface-2)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           opacity: isLoading ? 0.5 : 1,

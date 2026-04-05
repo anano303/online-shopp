@@ -1,0 +1,66 @@
+/* Admin Theme Page Module CSS */
+
+.palette-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--border-secondary);
+  cursor: pointer;
+  transition: all 200ms ease;
+  padding: 0;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.palette-btn:hover {
+  transform: scale(1.2);
+  border-color: var(--text-light);
+}
+
+.palette-btn.active {
+  border-color: var(--text-white);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.5), 0 0 0 6px rgba(var(--color-primary-rgb), 0.2);
+  transform: scale(1.1);
+}
+
+.theme-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 200ms ease;
+  font-size: 0.95rem;
+}
+
+.theme-btn.primary {
+  background: var(--color-primary-gradient);
+  color: var(--text-white);
+}
+
+.theme-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(var(--color-primary-rgb), 0.3);
+}
+
+.theme-btn.secondary {
+  background: var(--bg-surface-2);
+  color: var(--text-light);
+  border: 1px solid var(--border-light);
+}
+
+.theme-btn.secondary:hover {
+  border-color: var(--color-primary);
+  background: rgba(var(--color-primary-rgb), 0.1);
+}
+
+.theme-btn.danger {
+  background: rgba(var(--color-error), 0.1);
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+}
+
+.theme-btn.danger:hover {
+  background: var(--color-error);
+  color: var(--text-white);
+}

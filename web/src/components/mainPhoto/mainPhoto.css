@@ -1,0 +1,76 @@
+.main-photo {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+.main-photo-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--bg-surface-2);
+}
+
+.main-photo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(var(--shadow-rgb), 0);
+  transition: background 300ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-photo:hover .main-photo-overlay {
+  background: rgba(var(--shadow-rgb), 0.2);
+}
+
+.main-photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(var(--shadow-rgb), 0.8), transparent);
+  color: var(--text-white);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.main-photo-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.main-photo-subtitle {
+  font-size: 1rem;
+  margin: 0.5rem 0 0 0;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .main-photo {
+    border-radius: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .main-photo-caption {
+    padding: 1.5rem 1rem;
+  }
+
+  .main-photo-title {
+    font-size: 1.25rem;
+  }
+
+  .main-photo-subtitle {
+    font-size: 0.875rem;
+  }
+}

@@ -8,66 +8,29 @@ import { useLanguage } from "@/hooks/LanguageContext";
 import { Category, SubCategory, Color, AgeGroupItem } from "@/types";
 import HeartLoading from "@/components/HeartLoading/HeartLoading";
 import Image from "next/image";
-import { devLog } from "@/utils/logger";
 
-// Function to get category-specific icon - now uses icon from category if available
-const getCategoryIcon = (category: Category) => {
-  devLog(
-    "[FILTER] getCategoryIcon called with:",
-    category.name,
-    "Icon:",
-    category.icon
-  );
-
-  // Use category icon if available
-  if (category.icon) {
-    devLog("[FILTER] Using API icon:", category.icon);
+// Returns emoji for categories (matches CategoryNavigation logic)
+const getCategoryEmoji = (category: Category): string => {
+  // Use emoji from API if it looks like one (short, non-URL string)
+  if (category.icon && !category.icon.startsWith("/") && !category.icon.startsWith("http") && category.icon.length <= 4) {
     return category.icon;
   }
 
-  // Fallback to name-based icons for backwards compatibility
-  devLog("[FILTER] Using fallback icon");
-  const name = category.name.toLowerCase();
+  const name = (category.name || "").toLowerCase();
 
-  if (
-    name.includes("ნადირობა") ||
-    name.includes("hunting") ||
-    name.includes("rifle")
-  ) {
-    return "/gun.png";
-  } else if (
-    name.includes("საბრძოლო") ||
-    name.includes("ammunition") ||
-    name.includes("ammo")
-  ) {
-    return "/gun.png";
-  } else if (
-    name.includes("დასვენება") ||
-    name.includes("camping") ||
-    name.includes("camp")
-  ) {
-    return "/camping.png";
-  } else if (
-    name.includes("თევზაობა") ||
-    name.includes("fishing") ||
-    name.includes("fish")
-  ) {
-    return "/fish.png";
-  } else if (
-    name.includes("ტანსაცმელი") ||
-    name.includes("clothing") ||
-    name.includes("clothes")
-  ) {
-    return "/clothes.png";
-  } else if (
-    name.includes("აქსესუარები") ||
-    name.includes("accessories") ||
-    name.includes("gear")
-  ) {
-    return "/clothes.png";
-  } else {
-    return "/clothes.png"; // Default icon
-  }
+  if (name.includes("ნადირობა") || name.includes("hunting") || name.includes("rifle")) return "🎯";
+  if (name.includes("საბრძოლო") || name.includes("ammunition") || name.includes("ammo")) return "💥";
+  if (name.includes("დასვენება") || name.includes("camping") || name.includes("camp")) return "⛺";
+  if (name.includes("თევზაობა") || name.includes("fishing") || name.includes("fish")) return "🎣";
+  if (name.includes("ტანსაცმელი") || name.includes("clothing") || name.includes("clothes")) return "👕";
+  if (name.includes("ფეხსაცმელი") || name.includes("footwear") || name.includes("shoe")) return "👟";
+  if (name.includes("საცურაო") || name.includes("swim") || name.includes("water")) return "🏊";
+  if (name.includes("აქსესუარები") || name.includes("accessories") || name.includes("gear")) return "🎒";
+  if (name.includes("სპორტი") || name.includes("sport")) return "⚽";
+  if (name.includes("ელექტრო") || name.includes("electronic")) return "⚡";
+  if (name.includes("სახლი") || name.includes("home")) return "🏠";
+
+  return "🛒";
 };
 
 interface FilterProps {
@@ -816,13 +779,9 @@ export function ProductFilters({
                             : ""
                         }`}
                       >
-                        <Image
-                          src={getCategoryIcon(category)}
-                          alt={category.name}
-                          width={24}
-                          height={24}
-                          className="category-icon"
-                        />
+                        <span className="category-emoji" aria-hidden="true">
+                          {getCategoryEmoji(category)}
+                        </span>
                         <span className="filter-category-name">
                           {getLocalizedName(category.name, category)}
                         </span>
@@ -1099,12 +1058,17 @@ export function ProductFilters({
                       borderRadius: "8px",
                       cursor: "pointer",
                       border: "2px solid",
-                      borderColor: showDiscountedOnly ? "#e74c3c" : "#ddd",
+                      borderColor: showDiscountedOnly
+                        ? "var(--color-error)"
+                        : "var(--border-light)",
                       backgroundColor: showDiscountedOnly
-                        ? "#e74c3c"
-                        : "transparent",
+                        ? "var(--color-error)"
+                        : "var(--color-transparent)",
 
                       fontWeight: showDiscountedOnly ? "bold" : "normal",
+                      color: showDiscountedOnly
+                        ? "var(--text-white)"
+                        : "var(--text-light)",
                       display: "flex",
                       alignItems: "center",
                       gap: "8px",

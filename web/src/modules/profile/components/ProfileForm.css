@@ -1,0 +1,106 @@
+.profile-form {
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-light);
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.profile-form-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin: 0 0 2rem 0;
+}
+
+.profile-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.profile-form-label {
+  display: block;
+  color: var(--text-light);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.profile-form-input,
+.profile-form-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+  background: var(--bg-surface-2);
+  color: var(--text-light);
+  font-size: 1rem;
+  transition: all 200ms ease;
+  font-family: inherit;
+}
+
+.profile-form-input:hover,
+.profile-form-textarea:hover {
+  border-color: var(--border-light);
+}
+
+.profile-form-input:focus,
+.profile-form-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+}
+
+.profile-form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.profile-form-submit {
+  width: 100%;
+  padding: 0.875rem;
+  background: var(--color-primary-gradient);
+  color: var(--text-white);
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.profile-form-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+}
+
+.profile-form-error {
+  color: var(--color-error);
+  font-size: 0.875rem;
+  margin-top: 0.375rem;
+}
+
+.profile-form-success {
+  background: var(--bg-success);
+  color: var(--color-success);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .profile-form {
+    padding: 1.5rem 1rem;
+    border-radius: 0.75rem;
+  }
+
+  .profile-form-title {
+    font-size: 1.25rem;
+  }
+
+  .profile-form-input,
+  .profile-form-textarea {
+    font-size: 16px;
+  }
+}
