@@ -1,0 +1,19 @@
+# Docker ignore file to reduce build context size
+node_modules
+npm-debug.log
+dist
+.env
+.env.*
+!.env.example
+.git
+.gitignore
+.vscode
+.idea
+*.log
+coverage
+.nyc_output
+test
+*.md
+!README.md
+uploads/*
+!uploads/.gitkeep

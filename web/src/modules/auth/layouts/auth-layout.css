@@ -1,0 +1,64 @@
+.auth-layout {
+  background: var(--bg-auth);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-layout::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      100% 253.65% at 100% 0%,
+      var(--bg-auth) 5%,
+      var(--color-primary) 50.11%,
+      var(--bg-auth) 86.44%
+    )
+    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+
+  z-index: 1;
+}
+
+.auth-layout-inner {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.auth-layout-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-layout-title {
+  color: var(--text-light); /* Lighter color */
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-family: "FiraGo", sans-serif;
+  text-shadow: 1px 1px 3px rgba(var(--shadow-rgb), 0.5);
+}
+
+.auth-layout-subtitle {
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: "FiraGo", sans-serif;
+}
+
+.auth-layout-children {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

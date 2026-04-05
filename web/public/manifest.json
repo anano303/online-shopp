@@ -1,0 +1,11 @@
+{
+  "name": "ცამეტი",
+  "short_name": "ცამეტი",
+  "icons": [
+    {
+      "src": "/api/logo",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}

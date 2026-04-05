@@ -1,0 +1,238 @@
+/* Common animation styles for section transitions */
+.section-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.reveal-section {
+  opacity: 1; /* Set to 1 by default to prevent layout issues */
+  transform: none; /* Remove transform to prevent layout shifts */
+  transition: none; /* Disable transitions to prevent scroll interference */
+  will-change: auto; /* Remove performance optimization that might cause issues */
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Class to disable animations for users who prefer reduced motion */
+.reduced-motion .reveal-section {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Disable staggered animations completely to prevent scroll issues */
+.reveal-section.reveal-visible > * {
+  animation: none;
+  opacity: 1;
+}
+
+.reveal-section.reveal-visible > *:nth-child(1) {
+  animation-delay: 0s;
+}
+.reveal-section.reveal-visible > *:nth-child(2) {
+  animation-delay: 0s;
+}
+.reveal-section.reveal-visible > *:nth-child(3) {
+  animation-delay: 0s;
+}
+.reveal-section.reveal-visible > *:nth-child(4) {
+  animation-delay: 0s;
+}
+.reveal-section.reveal-visible > *:nth-child(5) {
+  animation-delay: 0s;
+}
+
+/* Disable staggered animations for reduced motion */
+.reduced-motion .reveal-section.reveal-visible > * {
+  animation: none;
+  opacity: 1;
+}
+
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(15px); /* Reduced from 30px */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide-in animations from different directions */
+.slide-left {
+  transform: translateX(-50px); /* Reduced from -100px */
+}
+
+.slide-right {
+  transform: translateX(50px); /* Reduced from 100px */
+}
+
+.slide-up {
+  transform: translateY(50px); /* Reduced from 100px */
+}
+
+.slide-down {
+  transform: translateY(-50px); /* Reduced from -100px */
+}
+
+.slide-left.reveal-visible,
+.slide-right.reveal-visible,
+.slide-up.reveal-visible,
+.slide-down.reveal-visible {
+  transform: translate(0);
+  opacity: 1;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Added explicit transition */
+}
+
+/* Disable slide animations for reduced motion */
+.reduced-motion .slide-left,
+.reduced-motion .slide-right,
+.reduced-motion .slide-up,
+.reduced-motion .slide-down {
+  transform: none;
+  transition: none;
+}
+
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.6s ease-out; /* Reduced from 1.2s */
+}
+
+.fade-in.reveal-visible {
+  opacity: 1;
+}
+
+/* Scale animation */
+.scale-in {
+  transform: scale(0.9); /* Less aggressive scale (was 0.8) */
+  opacity: 0;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Reduced from 1s */
+}
+
+.scale-in.reveal-visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Disable fade and scale animations for reduced motion */
+.reduced-motion .fade-in,
+.reduced-motion .scale-in {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Animations for category titles in HomePageShop */
+.category-title-animation {
+  opacity: 0;
+  transform: translateX(
+    -50px
+  ); /* Increased from -30px for more visible effect */
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  will-change: opacity, transform;
+  /* Initial state - make sure it's invisible before animation */
+  visibility: visible;
+}
+
+.category-title-animation.animate-visible {
+  opacity: 1;
+  transform: translateX(0);
+  /* Ensure visibility during animation */
+  visibility: visible;
+}
+
+/* Animations for product sections in HomePageShop */
+.product-section-animation {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition-delay: 0.2s; /* Slight delay after the title appears */
+  will-change: opacity, transform;
+}
+
+.product-section-animation.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animations for HomePageShop elements */
+.product-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition-delay: 0.2s;
+  will-change: opacity, transform;
+}
+
+.product-section.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-section .section-title {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  will-change: opacity, transform;
+}
+
+.product-section .section-title.animate-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Staggered delay for multiple product sections */
+.product-section:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.product-section:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.product-section:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.product-section:nth-child(4) {
+  transition-delay: 0.4s;
+}
+.product-section:nth-child(5) {
+  transition-delay: 0.5s;
+}
+
+/* Disable HomePageShop animations for reduced motion */
+.reduced-motion .category-title-animation,
+.reduced-motion .product-section-animation,
+.reduced-motion .product-section,
+.reduced-motion .product-section .section-title {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Special animation for product items */
+.product-item-animation {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease-out;
+}
+
+.product-item-animation.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation for brand logos */
+.brand-animation {
+  opacity: 0;
+  filter: grayscale(100%);
+  transition: all 0.8s ease-out;
+}
+
+.brand-animation.reveal-visible {
+  opacity: 1;
+  filter: grayscale(0%);
+}

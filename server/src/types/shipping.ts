@@ -1,0 +1,17 @@
+export interface ShippingDetails {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  address: string;
+  city: string;
+  postalCode?: string;
+  country: string;
+  phoneNumber: string;
+}
+
+export interface PaymentResult {
+  id: string;
+  status: string;
+  update_time: string;
+  email_address: string;
+}

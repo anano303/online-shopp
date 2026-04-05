@@ -1,0 +1,49 @@
+/* Additional styles to improve scrolling experience */
+
+/* Ensure sections maintain consistent height regardless of animation state */
+.section-wrapper {
+  min-height: 0; /* Prevent unexpected minimum heights */
+  content-visibility: auto; /* Modern browsers will optimize off-screen content */
+}
+
+/* Use passive scroll for improved performance */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Disable performance optimizations for animations since they're disabled */
+.reveal-section,
+.slide-left,
+.slide-right,
+.slide-up,
+.slide-down,
+.fade-in,
+.scale-in,
+.product-section,
+.product-section .section-title {
+  will-change: auto; /* Remove performance hints that might interfere */
+  backface-visibility: visible; /* Reset to default */
+}
+
+/* Reset for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal-section,
+  .slide-left,
+  .slide-right,
+  .slide-up,
+  .slide-down,
+  .fade-in,
+  .scale-in,
+  .product-section,
+  .product-section .section-title {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+    will-change: auto;
+  }
+}

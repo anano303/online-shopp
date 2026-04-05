@@ -1,0 +1,75 @@
+.space-x-2 {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.space-x-2 button {
+  background-color: var(--color-transparent);
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.space-x-2 button:hover {
+  background-color: rgba(var(--shadow-rgb), 0.25);
+  transform: translateY(-2px);
+}
+
+.prd-action-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  background-color: var(--color-transparent);
+}
+
+.prd-action-link:hover {
+  background-color: rgba(var(--shadow-rgb), 0.25);
+  transform: translateY(-2px);
+}
+
+.actions {
+  width: 18px;
+  height: 18px;
+  transition: color 0.2s ease;
+}
+
+.actions.edit {
+  color: var(--text-light);
+}
+
+.actions.edit:hover {
+  color: var(--color-primary);
+}
+
+.actions.approve {
+  color: var(--text-light);
+}
+
+.actions.approve:hover {
+  color: var(--color-primary);
+}
+
+.actions.reject {
+  color: var(--text-light);
+}
+
+.actions.reject:hover {
+  color: var(--text-light);
+}
+
+.actions.trash {
+  color: var(--text-light);
+}
+
+.actions.trash:hover {
+  color: var(--text-light);
+}

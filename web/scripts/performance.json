@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
+    "dev": "next dev",
+    "dev:turbo": "next dev --turbo",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "build:prod": "NODE_ENV=production next build",
+    "analyze": "ANALYZE=true npm run build",
+    "optimize": "next-optimized-images",
+    "performance": "npm run build && npm run analyze"
+  }
+}
