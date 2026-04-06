@@ -109,39 +109,61 @@ export function BOGButton({ orderId, amount, orderNumber }: BOGButtonProps) {
     <button
       onClick={handleBOGPayment}
       disabled={isProcessing}
-      className="w-full hover:bg-gray-50 text-black font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-start space-x-3 border border-gray-200 hover:border-gray-300"
       style={{
-        fontFamily: '"ALK Life", serif',
-        fontSize: "18px",
-        letterSpacing: "0.5px",
-        color: "var(--text-dark)",
-        backgroundColor:
-          "color-mix(in srgb, var(--color-error), var(--text-white) 82%)",
         width: "100%",
-        padding: "12px 24px",
-        border: "1px solid var(--color-error)",
-        cursor: "pointer",
-        transition: "background-color 0.3s, border-color 0.3s",
+        padding: "1rem 1.5rem",
+        background: "var(--color-primary-gradient)",
+        color: "#fff",
+        border: "none",
+        borderRadius: "0.625rem",
+        cursor: isProcessing ? "not-allowed" : "pointer",
+        opacity: isProcessing ? 0.7 : 1,
+        transition: "all 250ms ease",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        gap: "8px",
+        gap: "0.625rem",
+        fontFamily: "inherit",
+        fontSize: "1.05rem",
+        fontWeight: 700,
+        letterSpacing: "0.02em",
+        boxShadow: "0 6px 20px rgba(var(--color-primary-rgb), 0.35)",
+      }}
+      onMouseEnter={(e) => {
+        if (!isProcessing) {
+          e.currentTarget.style.transform = "translateY(-2px)";
+          e.currentTarget.style.boxShadow =
+            "0 10px 28px rgba(var(--color-primary-rgb), 0.45)";
+        }
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0)";
+        e.currentTarget.style.boxShadow =
+          "0 6px 20px rgba(var(--color-primary-rgb), 0.35)";
       }}
     >
-      <svg
-        className="w-6 h-6"
-        viewBox="0 0 24 24"
-        fill="var(--text-dark)"
-        width={20}
-        height={20}
-        color="var(--color-success)"
-      >
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-      </svg>
-      <span className="font-medium">
+      {isProcessing ? (
+        <span
+          style={{
+            width: 18,
+            height: 18,
+            border: "2px solid rgba(255,255,255,0.3)",
+            borderTopColor: "#fff",
+            borderRadius: "50%",
+            animation: "spin 0.6s linear infinite",
+          }}
+        />
+      ) : (
+        <svg viewBox="0 0 24 24" fill="#fff" width={22} height={22}>
+          <path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4V6h16v12zm-8-1h2v-4h4v-2h-4V7h-2v4H8v2h4v4z" />
+        </svg>
+      )}
+      <span>
         {isProcessing ? t("order.processing") : t("order.paymentButton")}
       </span>
-      <span className="font-bold ml-auto"> {amount.toFixed(2)} ₾</span>
+      <span style={{ marginLeft: "auto", fontSize: "1.1rem" }}>
+        {amount.toFixed(2)} ₾
+      </span>
     </button>
   );
 }
