@@ -48,14 +48,19 @@
   box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.3);
 }
 
+/* ── Scrollable table wrapper ── */
+.banner-table-wrapper {
+  overflow-x: auto;
+  border-radius: 0.625rem;
+  border: 1px solid var(--border-light);
+}
+
 /* ── Table ── */
 .banner-table {
   width: 100%;
+  min-width: 600px;
   border-collapse: collapse;
   font-size: 0.875rem;
-  overflow: hidden;
-  border-radius: 0.625rem;
-  border: 1px solid var(--border-light);
 }
 
 .banner-thead-row {

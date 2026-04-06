@@ -49,6 +49,7 @@ export class Order {
   @Prop({
     required: true,
     type: {
+      deliveryType: { type: String, enum: ['pickup', 'delivery'], default: 'delivery' },
       address: { required: true, type: String },
       city: { required: true, type: String },
       postalCode: { required: false, type: String },

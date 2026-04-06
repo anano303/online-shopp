@@ -195,6 +195,24 @@ export function AdminOrderDetails({ order }: AdminOrderDetailsProps) {
           {/* Shipping Info */}{" "}
           <div className="card">
             <h2>{t("adminOrders.shipping")}</h2>
+            {order.shippingDetails.deliveryType && (
+              <p>
+                <strong>ტიპი:</strong>{" "}
+                <span
+                  className={`delivery-type-tag ${order.shippingDetails.deliveryType}`}
+                >
+                  {order.shippingDetails.deliveryType === "pickup" ? (
+                    <>
+                      <Store size={14} /> გატანა
+                    </>
+                  ) : (
+                    <>
+                      <Truck size={14} /> მიწოდება
+                    </>
+                  )}
+                </span>
+              </p>
+            )}
             <p>
               <strong>{t("adminOrders.address")}:</strong>{" "}
               {order.shippingDetails.address}, {order.shippingDetails.city},{" "}

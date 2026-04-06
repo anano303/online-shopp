@@ -17,6 +17,7 @@ import { UpdatePrivacyPolicyDto } from '../dtos/update-privacy-policy.dto';
 // import { UpdateAboutPageDto } from '../dtos/update-about-page.dto';
 import { UpdateTermsConditionsDto } from '../dtos/update-terms-conditions.dto';
 import { UpdateReturnPolicyDto } from '../dtos/update-return-policy.dto';
+import { UpdatePickupSettingsDto } from '../dtos/update-pickup-settings.dto';
 import { JwtAuthGuard } from '@/guards/jwt-auth.guard';
 import { RolesGuard } from '@/guards/roles.guard';
 import { Roles } from '@/decorators/roles.decorator';
@@ -127,5 +128,17 @@ export class SettingsController {
     const field = mode === 'dark' ? 'logoUrlDark' : 'logoUrl';
     await this.settingsService.updateFooterSettings({ [field]: optimizedUrl });
     return { url: optimizedUrl, field };
+  }
+
+  @Get('pickup')
+  async getPickupSettings() {
+    return this.settingsService.getPickupSettings();
+  }
+
+  @Put('pickup')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  async updatePickupSettings(@Body() dto: UpdatePickupSettingsDto) {
+    return this.settingsService.updatePickupSettings(dto);
   }
 }

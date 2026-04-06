@@ -1,0 +1,106 @@
+/* ══════════════════════════════════════════
+   Pickup Settings Page
+   ══════════════════════════════════════════ */
+
+.pickup-settings-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.pickup-settings-header {
+  margin-bottom: 2rem;
+}
+
+.pickup-settings-header h1 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-light);
+  margin: 0 0 0.5rem;
+}
+
+.pickup-settings-header p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.pickup-settings-card {
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-light);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pickup-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.pickup-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.pickup-field input {
+  padding: 0.65rem 0.85rem;
+  font-size: 0.95rem;
+  border: 1.5px solid var(--border-light);
+  border-radius: 8px;
+  background: var(--bg-surface-2);
+  color: var(--text-light);
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+
+.pickup-field input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 79, 70, 229), 0.1);
+}
+
+.pickup-save-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-primary-gradient, var(--color-primary));
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.pickup-save-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(var(--color-primary-rgb, 79, 70, 229), 0.3);
+}
+
+.pickup-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  .pickup-settings-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .pickup-settings-card {
+    padding: 1.5rem;
+  }
+}

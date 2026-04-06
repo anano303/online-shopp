@@ -19,6 +19,10 @@ import {
   ReturnPolicy,
   ReturnPolicySchema,
 } from './schemas/return-policy.schema';
+import {
+  PickupSettings,
+  PickupSettingsSchema,
+} from './schemas/pickup-settings.schema';
 import { CloudinaryModule } from '@/cloudinary/cloudinary.module';
 
 @Module({
@@ -29,6 +33,7 @@ import { CloudinaryModule } from '@/cloudinary/cloudinary.module';
       { name: AboutPage.name, schema: AboutPageSchema },
       { name: TermsConditions.name, schema: TermsConditionsSchema },
       { name: ReturnPolicy.name, schema: ReturnPolicySchema },
+      { name: PickupSettings.name, schema: PickupSettingsSchema },
     ]),
     CloudinaryModule,
   ],

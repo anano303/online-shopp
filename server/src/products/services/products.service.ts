@@ -691,6 +691,34 @@ export class ProductsService {
     }
   }
 
+  async duplicate(id: string, user: UserDocument): Promise<ProductDocument> {
+    const original = await this.productModel.findById(id).exec();
+    if (!original) {
+      throw new NotFoundException(`Product with ID ${id} not found`);
+    }
+
+    const productObj = original.toObject() as any;
+    delete productObj._id;
+    delete productObj.__v;
+    delete productObj.createdAt;
+    delete productObj.updatedAt;
+
+    const duplicated = new this.productModel({
+      ...productObj,
+      name: `${productObj.name} (ასლი)`,
+      nameEn: productObj.nameEn
+        ? `${productObj.nameEn} (Copy)`
+        : undefined,
+      status: ProductStatus.APPROVED,
+      rating: 0,
+      numReviews: 0,
+      reviews: [],
+      user: user,
+    });
+
+    return duplicated.save();
+  }
+
   async findAll(options: FindAllProductsDto): Promise<any> {
     let query = {};
     if (options.mainCategory) {

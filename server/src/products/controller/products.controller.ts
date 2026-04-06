@@ -170,6 +170,16 @@ export class ProductsController {
     return this.productsService.findAll(query);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  @Post(':id/duplicate')
+  async duplicateProduct(
+    @Param('id') id: string,
+    @CurrentUser() user: UserDocument,
+  ) {
+    return this.productsService.duplicate(id, user);
+  }
+
   @UseGuards(RolesGuard)
   @Delete(':id')
   deleteUser(@Param('id') id: string) {

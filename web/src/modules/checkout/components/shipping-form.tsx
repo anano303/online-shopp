@@ -46,6 +46,20 @@ export function ShippingForm() {
     enabled: !!user,
   });
 
+  // Fetch pickup settings
+  const { data: pickupSettings } = useQuery<{
+    address: string;
+    city: string;
+    workingHours: string;
+    phone: string;
+  }>({
+    queryKey: ["pickupSettings"],
+    queryFn: async () => {
+      const response = await apiClient.get("/settings/pickup");
+      return response.data;
+    },
+  });
+
   // Mutation for saving new address
   const saveAddressMutation = useMutation({
     mutationFn: async (addressData: {
@@ -175,11 +189,13 @@ export function ShippingForm() {
 
       if (data.deliveryType === "pickup") {
         // თვითგატანა
+        const pAddr = pickupSettings?.address || "თბილისი, ვასილ კაკაბაძის ქ. N8";
+        const pCity = pickupSettings?.city || "თბილისი";
+        const pHours = pickupSettings?.workingHours || "სამუშაო დღეებში 20:00 - 22:00";
         shippingData = {
           deliveryType: "pickup",
-          address:
-            "თვითგატანა - თბილისი,ვასილ კაკაბაძის ქ. N8, სამუშაო დღეებში 20:00-დან 22:00-მდე",
-          city: "თბილისი",
+          address: `თვითგატანა - ${pAddr}, ${pHours}`,
+          city: pCity,
           country: "GE",
           phoneNumber: data.phoneNumber,
         };
@@ -322,17 +338,17 @@ export function ShippingForm() {
             </h3>
             <p>
               <strong>{language === "ge" ? "მისამართი:" : "Address:"}</strong>{" "}
-              თბილისი, ვასილ კაკაბაძის ქ. N8
+              {pickupSettings?.address || "თბილისი, ვასილ კაკაბაძის ქ. N8"}
             </p>
             <p>
               <strong>
                 {language === "ge" ? "სამუშაო საათები:" : "Working Hours:"}
               </strong>{" "}
-              სამუშაო დღეებში 20:00 - 22:00
+              {pickupSettings?.workingHours || "სამუშაო დღეებში 20:00 - 22:00"}
             </p>
             <p>
-              <strong>{language === "ge" ? "ტელეფონი:" : "Phone:"}</strong> +995
-              574150531
+              <strong>{language === "ge" ? "ტელეფონი:" : "Phone:"}</strong>{" "}
+              {pickupSettings?.phone || "+995 574150531"}
             </p>
           </div>
         )}

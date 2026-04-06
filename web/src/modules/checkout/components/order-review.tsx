@@ -226,9 +226,9 @@ export function OrderReview() {
 
   return (
     <div className="order-review-grid">
-      <div className="order-details col-span-8 space-y-6">
+      <div className="order-details">
         {/* Shipping Address */}
-        <div className="card p-6">
+        <div className="card">
           <h2 className="section-title">{t("checkout.shipping")}</h2>
           <p className="address-details">
             <strong>{t("checkout.address")}: </strong>
@@ -242,7 +242,7 @@ export function OrderReview() {
         </div>
 
         {/* Payment Method */}
-        <div className="card p-6">
+        <div className="card">
           <h2 className="section-title">{t("checkout.payment")}</h2>
           <p className="payment-method">
             <strong>{t("checkout.method")}: </strong>
@@ -251,9 +251,9 @@ export function OrderReview() {
         </div>
 
         {/* Order Items */}
-        <div className="card p-6">
+        <div className="card">
           <h2 className="section-title">{t("checkout.orderItems")}</h2>
-          <div className="order-items space-y-4">
+          <div className="order-items">
             {items.map((item) => {
               // Display name based on selected language
               const displayName =
@@ -264,24 +264,24 @@ export function OrderReview() {
                   key={`${item.productId}-${item.color ?? "c"}-${
                     item.size ?? "s"
                   }-${item.ageGroup ?? "a"}`}
-                  className="order-item flex items-center space-x-4"
+                  className="order-item"
                 >
-                  <div className="image-container relative h-20 w-20">
+                  <div className="image-container" style={{ position: "relative", width: "5rem", height: "5rem" }}>
                     <Image
                       src={item.image}
                       alt={displayName}
                       fill
-                      className="object-cover rounded-md"
+                      style={{ objectFit: "cover", borderRadius: "0.375rem" }}
                     />
                   </div>
-                  <div className="order-item-details flex-1">
+                  <div className="order-item-details">
                     <Link
                       href={`/products/${item.productId}`}
-                      className="item-name font-medium hover:underline"
+                      className="item-name"
                     >
                       {displayName}
                     </Link>
-                    <p className="item-price text-sm text-muted-foreground">
+                    <p className="item-price">
                       {item.qty} x {item.price} ₾ = {item.qty * item.price} ₾
                     </p>
                   </div>
@@ -293,18 +293,18 @@ export function OrderReview() {
       </div>
 
       {/* Order Summary */}
-      <div className="order-summary col-span-4">
-        <div className="card p-6">
+      <div className="order-summary">
+        <div className="card">
           <h2 className="section-title">{t("checkout.orderSummary")}</h2>
-          <div className="summary-details space-y-4">
-            <div className="summary-row flex justify-between">
-              <span className="summary-label text-muted-foreground">
+          <div className="summary-details">
+            <div className="summary-row">
+              <span className="summary-label">
                 {t("checkout.items")}
               </span>
               <span>{itemsPrice.toFixed(2)} ₾</span>
             </div>
-            <div className="summary-row flex justify-between">
-              <span className="summary-label text-muted-foreground">
+            <div className="summary-row">
+              <span className="summary-label">
                 {t("checkout.shippingCost")}
               </span>
               <span>{shippingPrice.toFixed(2)} ₾</span>
@@ -318,12 +318,12 @@ export function OrderReview() {
             </div>
             */}
             <div className="separator" />
-            <div className="summary-row flex justify-between font-medium">
+            <div className="summary-row summary-total">
               <span>{t("checkout.total")}</span>
               <span>{totalPrice.toFixed(2)} ₾</span>
             </div>
             <button
-              className={`place-order-button w-full ${
+              className={`place-order-button ${
                 isPlacingOrder ? "loading" : ""
               }`}
               onClick={handlePlaceOrder}

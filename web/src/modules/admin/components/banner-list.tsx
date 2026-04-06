@@ -84,6 +84,7 @@ export function BannerList() {
       </div>
 
       {banners.data && banners.data.length > 0 ? (
+        <div className="banner-table-wrapper">
         <table className="banner-table">
           <thead className="banner-thead-row">
             <tr>
@@ -194,6 +195,7 @@ export function BannerList() {
             ))}
           </tbody>
         </table>
+        </div>
       ) : (
         <div
           style={{

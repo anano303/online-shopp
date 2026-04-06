@@ -1,4 +1,5 @@
 export interface ShippingDetails {
+  deliveryType?: "pickup" | "delivery";
   address: string;
   city: string;
   postalCode: string;

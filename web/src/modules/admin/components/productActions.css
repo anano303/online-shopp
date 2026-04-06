@@ -49,6 +49,19 @@
   color: var(--color-error);
 }
 
+.actions.copy {
+  color: var(--color-primary);
+}
+
+.prd-action-copy {
+  color: var(--color-primary);
+}
+
+.prd-action-copy:hover {
+  border-color: var(--color-primary);
+  background: rgba(var(--color-primary-rgb), 0.08);
+}
+
 /* ── Inline action buttons (approve/reject/delete) ── */
 .space-x-2 {
   display: inline-flex;

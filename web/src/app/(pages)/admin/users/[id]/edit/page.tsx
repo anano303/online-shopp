@@ -5,7 +5,8 @@ import { useParams, useRouter } from "next/navigation";
 import { toast } from "@/hooks/use-toast";
 import { fetchWithAuth } from "@/lib/fetch-with-auth";
 import { Role } from "@/types/role";
-import { User } from "@/types";
+import { User, SavedAddress } from "@/types";
+import { Pencil, Trash2, Plus, MapPin } from "lucide-react";
 import "./edit-user.css";
 
 export default function EditUserPage() {
@@ -16,10 +17,26 @@ export default function EditUserPage() {
   const [password, setPassword] = useState("");
   const [showPasswordField, setShowPasswordField] = useState(false);
 
+  // Address management state
+  const [addresses, setAddresses] = useState<SavedAddress[]>([]);
+  const [loadingAddresses, setLoadingAddresses] = useState(false);
+  const [showAddressForm, setShowAddressForm] = useState(false);
+  const [editingAddressId, setEditingAddressId] = useState<string | null>(null);
+  const [addressForm, setAddressForm] = useState({
+    label: "",
+    address: "",
+    city: "",
+    postalCode: "",
+    country: "საქართველო",
+    phoneNumber: "",
+    isDefault: false,
+  });
+
+  const userId = params?.id ? (params.id as string) : "";
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userId = params?.id ? (params.id as string) : "";
         const response = await fetchWithAuth(`/users/${userId}`);
         const data = await response.json();
         setUser(data);
@@ -35,8 +52,110 @@ export default function EditUserPage() {
       }
     };
 
-    fetchUser();
-  }, [params]);
+    if (userId) fetchUser();
+  }, [userId]);
+
+  // Fetch user addresses
+  useEffect(() => {
+    const fetchAddresses = async () => {
+      setLoadingAddresses(true);
+      try {
+        const response = await fetchWithAuth(`/users/${userId}/addresses`);
+        const data = await response.json();
+        setAddresses(Array.isArray(data) ? data : []);
+      } catch {
+        setAddresses([]);
+      } finally {
+        setLoadingAddresses(false);
+      }
+    };
+
+    if (userId) fetchAddresses();
+  }, [userId]);
+
+  const resetAddressForm = () => {
+    setAddressForm({
+      label: "",
+      address: "",
+      city: "",
+      postalCode: "",
+      country: "საქართველო",
+      phoneNumber: "",
+      isDefault: false,
+    });
+    setEditingAddressId(null);
+    setShowAddressForm(false);
+  };
+
+  const handleEditAddress = (addr: SavedAddress) => {
+    setAddressForm({
+      label: addr.label,
+      address: addr.address,
+      city: addr.city,
+      postalCode: addr.postalCode || "",
+      country: addr.country,
+      phoneNumber: addr.phoneNumber,
+      isDefault: addr.isDefault,
+    });
+    setEditingAddressId(addr.id);
+    setShowAddressForm(true);
+  };
+
+  const handleSaveAddress = async () => {
+    try {
+      if (editingAddressId) {
+        await fetchWithAuth(
+          `/users/${userId}/addresses/${editingAddressId}`,
+          {
+            method: "PUT",
+            body: JSON.stringify(addressForm),
+          }
+        );
+      } else {
+        await fetchWithAuth(`/users/${userId}/addresses`, {
+          method: "POST",
+          body: JSON.stringify(addressForm),
+        });
+      }
+      // Refresh addresses
+      const response = await fetchWithAuth(`/users/${userId}/addresses`);
+      const data = await response.json();
+      setAddresses(Array.isArray(data) ? data : []);
+      resetAddressForm();
+      toast({
+        title: "წარმატება",
+        description: editingAddressId
+          ? "მისამართი განახლდა"
+          : "მისამართი დაემატა",
+      });
+    } catch {
+      toast({
+        title: "შეცდომა",
+        description: "მისამართის შენახვა ვერ მოხერხდა",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleDeleteAddress = async (addressId: string) => {
+    if (!confirm("ნამდვილად წაშალოთ ეს მისამართი?")) return;
+    try {
+      await fetchWithAuth(`/users/${userId}/addresses/${addressId}`, {
+        method: "DELETE",
+      });
+      setAddresses((prev) => prev.filter((a) => a.id !== addressId));
+      toast({
+        title: "წარმატება",
+        description: "მისამართი წაიშალა",
+      });
+    } catch {
+      toast({
+        title: "შეცდომა",
+        description: "მისამართის წაშლა ვერ მოხერხდა",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,7 +171,6 @@ export default function EditUserPage() {
         ...(password && { password }),
       };
 
-      const userId = params?.id as string;
       await fetchWithAuth(`/users/${userId}`, {
         method: "PUT",
         body: JSON.stringify(updateData),
@@ -156,6 +274,165 @@ export default function EditUserPage() {
           </button>
         </div>
       </form>
+
+      {/* Address Management Section */}
+      <div className="addresses-section">
+        <div className="addresses-header">
+          <h2>
+            <MapPin size={20} />
+            მისამართები
+          </h2>
+          <button
+            className="add-address-btn"
+            onClick={() => {
+              resetAddressForm();
+              setShowAddressForm(true);
+            }}
+          >
+            <Plus size={16} />
+            დამატება
+          </button>
+        </div>
+
+        {loadingAddresses ? (
+          <p className="addresses-loading">იტვირთება...</p>
+        ) : addresses.length === 0 && !showAddressForm ? (
+          <p className="addresses-empty">მისამართები არ არის დამატებული</p>
+        ) : (
+          <div className="addresses-list">
+            {addresses.map((addr) => (
+              <div
+                key={addr.id}
+                className={`address-card ${addr.isDefault ? "default" : ""}`}
+              >
+                <div className="address-card-header">
+                  <span className="address-label">
+                    {addr.label}
+                    {addr.isDefault && (
+                      <span className="default-badge">ძირითადი</span>
+                    )}
+                  </span>
+                  <div className="address-card-actions">
+                    <button
+                      className="addr-edit-btn"
+                      onClick={() => handleEditAddress(addr)}
+                    >
+                      <Pencil size={14} />
+                    </button>
+                    <button
+                      className="addr-delete-btn"
+                      onClick={() => handleDeleteAddress(addr.id)}
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                </div>
+                <p className="address-text">
+                  {addr.address}, {addr.city}
+                  {addr.postalCode ? `, ${addr.postalCode}` : ""},{" "}
+                  {addr.country}
+                </p>
+                <p className="address-phone">{addr.phoneNumber}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {showAddressForm && (
+          <div className="address-form">
+            <h3>{editingAddressId ? "მისამართის რედაქტირება" : "ახალი მისამართი"}</h3>
+            <div className="address-form-fields">
+              <div className="address-form-row">
+                <div className="address-form-field">
+                  <label>სახელი (ლეიბლი)</label>
+                  <input
+                    value={addressForm.label}
+                    onChange={(e) =>
+                      setAddressForm((p) => ({ ...p, label: e.target.value }))
+                    }
+                    placeholder="მაგ: სახლი, ოფისი"
+                  />
+                </div>
+                <div className="address-form-field">
+                  <label>ტელეფონი</label>
+                  <input
+                    value={addressForm.phoneNumber}
+                    onChange={(e) =>
+                      setAddressForm((p) => ({
+                        ...p,
+                        phoneNumber: e.target.value,
+                      }))
+                    }
+                    placeholder="+995..."
+                  />
+                </div>
+              </div>
+              <div className="address-form-field">
+                <label>მისამართი</label>
+                <input
+                  value={addressForm.address}
+                  onChange={(e) =>
+                    setAddressForm((p) => ({ ...p, address: e.target.value }))
+                  }
+                />
+              </div>
+              <div className="address-form-row">
+                <div className="address-form-field">
+                  <label>ქალაქი</label>
+                  <input
+                    value={addressForm.city}
+                    onChange={(e) =>
+                      setAddressForm((p) => ({ ...p, city: e.target.value }))
+                    }
+                  />
+                </div>
+                <div className="address-form-field">
+                  <label>საფოსტო კოდი</label>
+                  <input
+                    value={addressForm.postalCode}
+                    onChange={(e) =>
+                      setAddressForm((p) => ({
+                        ...p,
+                        postalCode: e.target.value,
+                      }))
+                    }
+                  />
+                </div>
+                <div className="address-form-field">
+                  <label>ქვეყანა</label>
+                  <input
+                    value={addressForm.country}
+                    onChange={(e) =>
+                      setAddressForm((p) => ({ ...p, country: e.target.value }))
+                    }
+                  />
+                </div>
+              </div>
+              <label className="address-default-check">
+                <input
+                  type="checkbox"
+                  checked={addressForm.isDefault}
+                  onChange={(e) =>
+                    setAddressForm((p) => ({
+                      ...p,
+                      isDefault: e.target.checked,
+                    }))
+                  }
+                />
+                ძირითადი მისამართი
+              </label>
+            </div>
+            <div className="address-form-actions">
+              <button className="save-button" onClick={handleSaveAddress}>
+                {editingAddressId ? "განახლება" : "დამატება"}
+              </button>
+              <button className="cancel-button" onClick={resetAddressForm}>
+                გაუქმება
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

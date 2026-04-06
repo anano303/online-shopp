@@ -68,6 +68,7 @@ export function UsersList() {
           Create User
         </button>
       </div>
+      <div className="usr-table-wrapper">
       <table className="usr-table">
         <thead>
           <tr className="usr-thead-row">
@@ -128,6 +129,7 @@ export function UsersList() {
           ))}
         </tbody>
       </table>
+      </div>
 
       <div className="pagination">
         <button

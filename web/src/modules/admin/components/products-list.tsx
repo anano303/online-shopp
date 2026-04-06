@@ -347,6 +347,7 @@ export function ProductsList() {
       {isAdmin && pendingProducts?.length > 0 && (
         <div className="pending-products mb-4">
           <h2 className="text-xl font-bold mb-4">Pending Approvals</h2>
+          <div className="prd-table-wrapper">
           <table className="prd-table">
             <tbody>
               {pendingProducts.map((product: Product) => (
@@ -413,6 +414,7 @@ export function ProductsList() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       )}
       <div className="prd-header">
@@ -426,6 +428,7 @@ export function ProductsList() {
           </Link>
         </div>
       </div>
+      <div className="prd-table-wrapper">
       <table className="prd-table">
         <thead>
           <tr className="prd-thead-row">
@@ -527,6 +530,7 @@ export function ProductsList() {
           ))}
         </tbody>
       </table>
+      </div>
 
       <div className="pagination">
         <button

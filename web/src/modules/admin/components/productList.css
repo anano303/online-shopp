@@ -7,6 +7,12 @@
   padding: 1.5rem;
 }
 
+/* ── Table scroll wrapper ── */
+.prd-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* ── Search bar input wrapper ── */
 .search-bar input {
   padding: 0.5rem 0.875rem;
@@ -78,6 +84,7 @@
 /* ── Table ── */
 .prd-table {
   width: 100%;
+  min-width: 700px;
   border-collapse: collapse;
   font-size: 0.875rem;
 }

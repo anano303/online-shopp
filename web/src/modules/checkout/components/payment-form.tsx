@@ -97,107 +97,41 @@ export function PaymentForm() {
   }
 
   return (
-    <div className="card p-6">
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl font-semibold">
-            {t("checkout.paymentMethod")}
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            {t("checkout.choosePaymentMethod")}
-          </p>
+    <div className="payment-card">
+      <div className="payment-header">
+        <h1 className="payment-title">
+          {t("checkout.paymentMethod")}
+        </h1>
+        <p className="payment-subtitle">
+          {t("checkout.choosePaymentMethod")}
+        </p>
+      </div>
+
+      <form onSubmit={form.handleSubmit(onSubmit)} className="payment-form">
+        <div className="payment-options">
+          <label htmlFor="BOG" className="payment-option-label">
+            <input
+              type="radio"
+              value="BOG"
+              id="BOG"
+              className="payment-radio-hidden"
+              {...form.register("paymentMethod")}
+            />
+            <div className="payment-option-content">
+              <svg viewBox="0 0 24 24" fill="green" width="24" height="24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+              <span className="payment-option-text">
+                {t("checkout.cardPayment")}
+              </span>
+            </div>
+          </label>
         </div>
 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="form-item">
-            <label className="form-label">{t("checkout.paymentMethod")}</label>
-            <div className="form-control">
-              <div className="grid grid-cols-1 gap-4">
-                {/* PayPal Option - Temporarily Commented */}
-                {/* <div className="form-item">
-                  <div className="form-control">
-                    <label
-                      htmlFor="PayPal"
-                      className="border rounded-lg p-4 cursor-pointer hover:border-primary [&:has(:checked)]:border-primary block"
-                    >
-                      <input
-                        type="radio"
-                        value="PayPal"
-                        id="PayPal"
-                        className="sr-only"
-                        {...form.register("paymentMethod")}
-                      />
-                      <div className="flex flex-col items-center space-y-2">
-                        <FaPaypal className="h-6 w-6" />
-                        <span className="text-sm font-medium">PayPal</span>
-                      </div>
-                    </label>
-                  </div>
-                </div> */}
-
-                {/* Stripe Option - Temporarily Commented */}
-                {/* <div className="form-item">
-                  <div className="form-control">
-                    <label
-                      htmlFor="Stripe"
-                      className="border rounded-lg p-4 cursor-pointer hover:border-primary [&:has(:checked)]:border-primary block"
-                    >
-                      <input
-                        type="radio"
-                        value="Stripe"
-                        id="Stripe"
-                        className="sr-only"
-                        {...form.register("paymentMethod")}
-                      />
-                      <div className="flex flex-col items-center space-y-2">
-                        <CreditCard className="h-6 w-6" />
-                        <span className="text-sm font-medium">Card</span>
-                      </div>
-                    </label>
-                  </div>
-                </div> */}
-                <div className="form-item">
-                  <div className="form-control">
-                    <label
-                      htmlFor="BOG"
-                      className="border rounded-lg p-4 cursor-pointer hover:border-primary [&:has(:checked)]:border-primary [&:has(:checked)]:bg-gradient-to-r [&:has(:checked)]:from-red-600 [&:has(:checked)]:to-pink-600 [&:has(:checked)]:text-white block transition-all duration-300"
-                      style={{
-                        fontFamily: '"ALK Life", "Georgia", serif',
-                      }}
-                    >
-                      <input
-                        type="radio"
-                        value="BOG"
-                        id="BOG"
-                        className="sr-only"
-                        {...form.register("paymentMethod")}
-                      />
-                      <div className="flex flex-col items-center space-y-2">
-                        <svg
-                          className="h-6 w-6"
-                          viewBox="0 0 24 24"
-                          fill="green"
-                          width={20}
-                          height={20}
-                        >
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                        </svg>
-                        <span className="text-sm font-medium">
-                          {t("checkout.cardPayment")}
-                        </span>
-                      </div>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <button type="submit" className="w-full btn btn-primary">
-            {t("checkout.continueToReview")}
-          </button>
-        </form>
-      </div>
+        <button type="submit" className="payment-submit-btn">
+          {t("checkout.continueToReview")}
+        </button>
+      </form>
     </div>
   );
 }

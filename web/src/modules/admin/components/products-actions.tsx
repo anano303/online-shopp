@@ -1,4 +1,4 @@
-import { Pencil, Trash2, CheckCircle, XCircle } from "lucide-react";
+import { Pencil, Trash2, CheckCircle, XCircle, Copy } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "@/hooks/use-toast";
 import { Product, ProductStatus } from "@/types";
@@ -66,6 +66,29 @@ export function ProductsActions({
           description: "Failed to delete product",
         });
       }
+    }
+  };
+
+  const handleDuplicate = async () => {
+    if (!confirm("ნამდვილად გსურთ ამ პროდუქტის დაკოპირება?")) return;
+    try {
+      const response = await fetchWithAuth(
+        `/products/${product._id}/duplicate`,
+        { method: "POST" }
+      );
+      if (!response.ok) throw new Error("Failed to duplicate");
+      toast({
+        title: "წარმატება",
+        description: "პროდუქტი დაკოპირდა",
+      });
+      onDelete?.(); // triggers list refresh
+    } catch (error) {
+      console.log(error);
+      toast({
+        variant: "destructive",
+        title: "შეცდომა",
+        description: "პროდუქტის კოპირება ვერ მოხერხდა",
+      });
     }
   };
 
@@ -141,6 +164,14 @@ export function ProductsActions({
         onClick={handleDelete}
       >
         <Trash2 className="actions trash" />
+      </button>
+
+      <button
+        className="prd-action-copy"
+        onClick={handleDuplicate}
+        title="პროდუქტის კოპირება"
+      >
+        <Copy className="actions copy" />
       </button>
     </div>
   );

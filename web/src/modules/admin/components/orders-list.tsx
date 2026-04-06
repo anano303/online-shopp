@@ -68,7 +68,7 @@ export function OrdersList() {
         <form className="orders-search" onSubmit={handleSearchSubmit}>
           <input
             type="text"
-            placeholder="Search by order number (SSBB#####)"
+            placeholder="Search by order number (SHOP#####)"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />

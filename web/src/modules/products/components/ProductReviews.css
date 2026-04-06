@@ -1,0 +1,166 @@
+/* ══════════════════════════════════════════
+   Product Reviews Display
+   ══════════════════════════════════════════ */
+
+.reviews-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Summary (big rating + stars) ── */
+.reviews-summary {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.reviews-rating-big {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-light);
+  line-height: 1;
+}
+
+.reviews-summary-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.reviews-stars-row {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.reviews-star {
+  width: 20px;
+  height: 20px;
+  color: var(--border-light);
+  transition: all 0.15s;
+}
+
+.reviews-star.filled {
+  color: #facc15;
+  fill: #facc15;
+}
+
+.reviews-star.small {
+  width: 16px;
+  height: 16px;
+}
+
+.reviews-count {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* ── Rating bars ── */
+.reviews-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.reviews-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.reviews-bar-label {
+  width: 55px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.reviews-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.reviews-bar-fill {
+  height: 100%;
+  background: #facc15;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.reviews-bar-count {
+  width: 30px;
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+/* ── Individual review items ── */
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.review-item {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-light);
+}
+
+.review-item-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.review-item-name {
+  font-weight: 700;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.review-item-date {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.review-item-stars {
+  display: flex;
+  gap: 0.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.review-item-comment {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .reviews-rating-big {
+    font-size: 2.25rem;
+  }
+
+  .reviews-star {
+    width: 16px;
+    height: 16px;
+  }
+
+  .reviews-star.small {
+    width: 14px;
+    height: 14px;
+  }
+
+  .review-item {
+    padding: 1rem;
+  }
+}

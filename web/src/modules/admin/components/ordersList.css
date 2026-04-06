@@ -76,6 +76,7 @@
 /* ── Table ── */
 .orders-table {
   width: 100%;
+  min-width: 600px;
   border-collapse: collapse;
   font-size: 0.875rem;
 }

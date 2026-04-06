@@ -43,14 +43,19 @@
   box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.3);
 }
 
+/* ── Scrollable table wrapper ── */
+.usr-table-wrapper {
+  overflow-x: auto;
+  border-radius: 0.625rem;
+  border: 1px solid var(--border-light);
+}
+
 /* ── Table ── */
 .usr-table {
   width: 100%;
+  min-width: 650px;
   border-collapse: collapse;
   font-size: 0.875rem;
-  overflow: hidden;
-  border-radius: 0.625rem;
-  border: 1px solid var(--border-light);
 }
 
 .usr-thead-row {

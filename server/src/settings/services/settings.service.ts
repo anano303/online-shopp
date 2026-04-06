@@ -23,6 +23,11 @@ import { UpdatePrivacyPolicyDto } from '../dtos/update-privacy-policy.dto';
 // import { UpdateAboutPageDto } from '../dtos/update-about-page.dto';
 import { UpdateTermsConditionsDto } from '../dtos/update-terms-conditions.dto';
 import { UpdateReturnPolicyDto } from '../dtos/update-return-policy.dto';
+import {
+  PickupSettings,
+  PickupSettingsDocument,
+} from '../schemas/pickup-settings.schema';
+import { UpdatePickupSettingsDto } from '../dtos/update-pickup-settings.dto';
 
 import { UpdateAboutPageDto } from '../dtos/update-about-page.dto';
 
@@ -302,6 +307,8 @@ export class SettingsService {
     private termsConditionsModel: Model<TermsConditionsDocument>,
     @InjectModel(ReturnPolicy.name)
     private returnPolicyModel: Model<ReturnPolicyDocument>,
+    @InjectModel(PickupSettings.name)
+    private pickupSettingsModel: Model<PickupSettingsDocument>,
   ) {}
 
   async getFooterSettings(): Promise<FooterSettingsDocument> {
@@ -414,5 +421,26 @@ export class SettingsService {
       await policy.save();
     }
     return policy;
+  }
+
+  async getPickupSettings(): Promise<PickupSettingsDocument> {
+    let settings = await this.pickupSettingsModel.findOne();
+    if (!settings) {
+      settings = await this.pickupSettingsModel.create({});
+    }
+    return settings;
+  }
+
+  async updatePickupSettings(
+    dto: UpdatePickupSettingsDto,
+  ): Promise<PickupSettingsDocument> {
+    let settings = await this.pickupSettingsModel.findOne();
+    if (!settings) {
+      settings = await this.pickupSettingsModel.create(dto);
+    } else {
+      Object.assign(settings, dto);
+      await settings.save();
+    }
+    return settings;
   }
 }

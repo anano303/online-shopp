@@ -70,6 +70,15 @@ export class OrdersController {
     return this.ordersService.updateDelivered(id);
   }
 
+  @UseGuards(RolesGuard)
+  @Put(':id/shipping')
+  async updateShippingDetails(
+    @Param('id') id: string,
+    @Body() shippingDetails: any,
+  ) {
+    return this.ordersService.updateShippingDetails(id, shippingDetails);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Post(':id/cancel')
   async cancelOrder(

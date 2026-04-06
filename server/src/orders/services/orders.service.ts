@@ -21,6 +21,7 @@ import { Connection } from 'mongoose';
 import { EmailService } from '@/email/services/email.services';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
+import { ShippingDetails } from '@/interfaces';
 
 @Injectable()
 export class OrdersService {
@@ -75,7 +76,7 @@ export class OrdersService {
       return null;
     }
 
-    // Check for legacy prefixes (e.g. SSBB) - return as-is for DB lookup
+    // Check for legacy prefixes (e.g. SHOP) - return as-is for DB lookup
     for (const legacy of OrdersService.LEGACY_PREFIXES) {
       if (value.startsWith(legacy)) {
         const numericPart = value
@@ -494,6 +495,43 @@ export class OrdersService {
 
     const updatedOrder = await order.save();
     return updatedOrder;
+  }
+
+  async updateShippingDetails(
+    id: string,
+    shippingDetails: Partial<ShippingDetails>,
+  ): Promise<OrderDocument> {
+    if (!Types.ObjectId.isValid(id))
+      throw new BadRequestException('Invalid order ID.');
+
+    const order = await this.orderModel
+      .findById(id)
+      .populate('user', 'name email');
+
+    if (!order) throw new NotFoundException('No order with given ID.');
+
+    // Update only provided fields
+    if (shippingDetails.deliveryType !== undefined) {
+      order.shippingDetails.deliveryType = shippingDetails.deliveryType;
+    }
+    if (shippingDetails.address !== undefined) {
+      order.shippingDetails.address = shippingDetails.address;
+    }
+    if (shippingDetails.city !== undefined) {
+      order.shippingDetails.city = shippingDetails.city;
+    }
+    if (shippingDetails.postalCode !== undefined) {
+      order.shippingDetails.postalCode = shippingDetails.postalCode;
+    }
+    if (shippingDetails.country !== undefined) {
+      order.shippingDetails.country = shippingDetails.country;
+    }
+    if (shippingDetails.phoneNumber !== undefined) {
+      order.shippingDetails.phoneNumber = shippingDetails.phoneNumber;
+    }
+
+    order.markModified('shippingDetails');
+    return order.save();
   }
 
   async updateDelivered(id: string): Promise<OrderDocument> {

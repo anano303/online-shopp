@@ -1,5 +1,6 @@
 import { StarIcon } from "lucide-react";
 import type { Product } from "@/types";
+import "./ProductReviews.css";
 
 interface ProductReviewsProps {
   product: Product;
@@ -23,71 +24,67 @@ export function ProductReviews({ product }: ProductReviewsProps) {
   const totalReviews = Object.values(ratingCounts).reduce((a, b) => a + b, 0);
 
   return (
-    <div className="space-y-6 sm:space-y-4">
-      <div className="flex items-center gap-4 sm:gap-3">
-        <div className="text-4xl font-bold sm:text-3xl">
+    <div className="reviews-overview">
+      <div className="reviews-summary">
+        <div className="reviews-rating-big">
           {product.rating.toFixed(1)}
         </div>
-        <div className="space-y-1">
-          <div className="flex">
+        <div className="reviews-summary-right">
+          <div className="reviews-stars-row">
             {Array.from({ length: 5 }).map((_, i) => (
               <StarIcon
                 key={i}
-                className={`h-5 w-5 sm:h-4 sm:w-4 ${
-                  i < Math.floor(product.rating)
-                    ? "text-yellow-400 fill-yellow-400"
-                    : "text-gray-300"
+                className={`reviews-star ${
+                  i < Math.floor(product.rating) ? "filled" : ""
                 }`}
               />
             ))}
           </div>
-          <div className="text-sm text-muted-foreground">
+          <div className="reviews-count">
             Based on {product.numReviews} reviews
           </div>
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="reviews-bars">
         {Object.entries(ratingCounts)
           .reverse()
           .map(([rating, count]) => (
-            <div key={rating} className="flex items-center gap-4 sm:gap-3">
-              <div className="w-12 text-sm">{rating} stars</div>
-              <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+            <div key={rating} className="reviews-bar-row">
+              <div className="reviews-bar-label">{rating} stars</div>
+              <div className="reviews-bar-track">
                 <div
-                  className="h-full bg-yellow-400"
+                  className="reviews-bar-fill"
                   style={{
-                    width: `${(count / totalReviews) * 100}%`,
+                    width: totalReviews > 0 ? `${(count / totalReviews) * 100}%` : "0%",
                   }}
                 />
               </div>
-              <div className="w-12 text-sm text-right">{count}</div>
+              <div className="reviews-bar-count">{count}</div>
             </div>
           ))}
       </div>
 
-      <div className="space-y-6 sm:space-y-4">
+      <div className="reviews-list">
         {product.reviews.map((review, index) => (
-          <div key={index} className="space-y-2">
-            <div className="flex items-center gap-2 flex-wrap">
-              <div className="font-medium">{review.name}</div>
-              <div className="text-sm text-muted-foreground">
+          <div key={index} className="review-item">
+            <div className="review-item-header">
+              <div className="review-item-name">{review.name}</div>
+              <div className="review-item-date">
                 {new Date(review.createdAt).toLocaleDateString()}
               </div>
             </div>
-            <div className="flex">
+            <div className="review-item-stars">
               {Array.from({ length: 5 }).map((_, i) => (
                 <StarIcon
                   key={i}
-                  className={`h-4 w-4 sm:h-3 sm:w-3 ${
-                    i < review.rating
-                      ? "text-yellow-400 fill-yellow-400"
-                      : "text-gray-300"
+                  className={`reviews-star small ${
+                    i < review.rating ? "filled" : ""
                   }`}
                 />
               ))}
             </div>
-            <p className="text-sm">{review.comment}</p>
+            <p className="review-item-comment">{review.comment}</p>
           </div>
         ))}
       </div>

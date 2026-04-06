@@ -187,6 +187,13 @@ export default function UserMenu({ onNavigate }: { onNavigate?: () => void }) {
                 >
                   საიტის ფერები
                 </Link>
+                <Link
+                  href="/admin/pickup-settings"
+                  className="dropdown-item"
+                  onClick={handleLinkClick}
+                >
+                  თვითგატანის მისამართი
+                </Link>
               </>
             )}
 

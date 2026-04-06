@@ -248,4 +248,44 @@ export class UsersController {
       addressId,
     );
   }
+
+  // ============ Admin Address Management Endpoints ============
+
+  @Get(':userId/addresses')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  async getUserAddresses(@Param('userId') userId: string) {
+    return this.usersService.getAddresses(userId);
+  }
+
+  @Post(':userId/addresses')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  async addUserAddress(
+    @Param('userId') userId: string,
+    @Body() addressDto: CreateAddressDto,
+  ) {
+    return this.usersService.addAddress(userId, addressDto);
+  }
+
+  @Put(':userId/addresses/:addressId')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  async updateUserAddress(
+    @Param('userId') userId: string,
+    @Param('addressId') addressId: string,
+    @Body() addressDto: CreateAddressDto,
+  ) {
+    return this.usersService.updateAddress(userId, addressId, addressDto);
+  }
+
+  @Delete(':userId/addresses/:addressId')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  async deleteUserAddress(
+    @Param('userId') userId: string,
+    @Param('addressId') addressId: string,
+  ) {
+    return this.usersService.deleteAddress(userId, addressId);
+  }
 }
