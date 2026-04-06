@@ -57,6 +57,17 @@
   backdrop-filter: blur(12px);
 }
 
+@media (max-width: 768px) {
+  .dropdown-menu {
+    right: -0.5rem;
+    left: auto;
+    min-width: 200px;
+    max-height: 60vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
 .dropdown-label {
   font-size: 0.72rem;
   letter-spacing: 0.08em;

@@ -31,3 +31,12 @@
   place-items: center;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .search-form {
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
+}

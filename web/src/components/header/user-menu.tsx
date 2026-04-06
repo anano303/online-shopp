@@ -102,7 +102,7 @@ export default function UserMenu({ onNavigate }: { onNavigate?: () => void }) {
           <span className="username">
             {user.name || t("navigation.profile")}
           </span>
-          <span className="icon">▼</span>
+          <span className="icon">{isOpen ? "▲" : "▼"}</span>
         </button>
         {isOpen && (
           <div className="dropdown-menu">
