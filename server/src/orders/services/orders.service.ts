@@ -57,6 +57,8 @@ export class OrdersService {
       .padStart(OrdersService.ORDER_NUMBER_PAD_LENGTH, '0')}`;
   }
 
+  private static readonly LEGACY_PREFIXES = ['SSBB'];
+
   private normalizeOrderNumber(search?: string): string | null {
     if (!search) {
       return null;
@@ -71,6 +73,21 @@ export class OrdersService {
 
     if (!value) {
       return null;
+    }
+
+    // Check for legacy prefixes (e.g. SSBB) - return as-is for DB lookup
+    for (const legacy of OrdersService.LEGACY_PREFIXES) {
+      if (value.startsWith(legacy)) {
+        const numericPart = value
+          .slice(legacy.length)
+          .replace(/[^0-9]/g, '');
+        if (numericPart) {
+          return `${legacy}${numericPart.padStart(
+            OrdersService.ORDER_NUMBER_PAD_LENGTH,
+            '0',
+          )}`;
+        }
+      }
     }
 
     if (value.startsWith(OrdersService.ORDER_NUMBER_PREFIX)) {
@@ -359,9 +376,27 @@ export class OrdersService {
       throw new BadRequestException('Invalid order identifier.');
     }
 
-    const order = await this.orderModel
+    let order = await this.orderModel
       .findOne(query)
       .populate('user', 'name email firstName lastName');
+
+    // If not found by current prefix, try legacy prefixes
+    if (!order && query['orderNumber']) {
+      const value = id.trim().replace(/^#/, '').toUpperCase();
+      const digitsOnly = value.replace(/[^0-9]/g, '');
+      if (digitsOnly) {
+        for (const legacy of OrdersService.LEGACY_PREFIXES) {
+          const legacyNumber = `${legacy}${digitsOnly.padStart(
+            OrdersService.ORDER_NUMBER_PAD_LENGTH,
+            '0',
+          )}`;
+          order = await this.orderModel
+            .findOne({ orderNumber: legacyNumber })
+            .populate('user', 'name email firstName lastName');
+          if (order) break;
+        }
+      }
+    }
 
     if (!order) throw new NotFoundException('No order with given ID.');
 
