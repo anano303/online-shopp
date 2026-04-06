@@ -4,7 +4,9 @@ import { OrderReview } from "@/modules/checkout/components/order-review";
 export default function ReviewPage() {
   return (
     <div className="Container">
-      <div className="max-w-7xl mx-auto py-10 space-y-8">
+      <div
+        style={{ maxWidth: "900px", margin: "0 auto", padding: "2.5rem 1rem" }}
+      >
         <CheckoutSteps currentStep={3} />
         <OrderReview />
       </div>

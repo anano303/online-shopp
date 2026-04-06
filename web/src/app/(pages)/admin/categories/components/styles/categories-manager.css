@@ -5,6 +5,7 @@
   padding: 2rem 1.5rem;
 }
 
+.admin-header,
 .manager-header {
   display: flex;
   justify-content: space-between;
@@ -12,13 +13,69 @@
   margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-light);
 }
 
+.admin-title,
 .manager-title {
   font-size: 1.8rem;
   font-weight: 800;
   color: var(--text-light);
   margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* ── Tabs ── */
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  background: var(--bg-surface-2);
+  padding: 0.3rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--border-light);
+}
+
+.tab-button {
+  padding: 0.65rem 1.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 250ms ease;
+  white-space: nowrap;
+  position: relative;
+}
+
+.tab-button:hover {
+  color: var(--text-light);
+  background: rgba(var(--color-primary-rgb), 0.08);
+}
+
+.tab-button.active {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(var(--color-primary-rgb), 0.3);
+}
+
+/* ── Tab content ── */
+.tab-content {
+  margin-top: 1.5rem;
+  animation: catTabFadeIn 250ms ease;
+}
+
+@keyframes catTabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .manager-actions {
@@ -56,10 +113,15 @@
   border-radius: 1rem;
   background: var(--bg-surface-1);
   border: 1px solid var(--border-light);
+  transition: border-color 200ms ease;
+}
+
+.manager-panel:hover {
+  border-color: rgba(var(--color-primary-rgb), 0.2);
 }
 
 .panel-title {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-light);
   margin: 0 0 1.5rem;
@@ -67,7 +129,7 @@
   border-bottom: 2px solid var(--border-light);
 }
 
-.search-input {
+/* .search-input {
   width: 100%;
   padding: 0.75rem 1rem;
   border: 1px solid var(--border-light);
@@ -78,12 +140,17 @@
   transition: all 200ms ease;
   margin-bottom: 1.5rem;
   box-sizing: border-box;
-}
+} */
 
 .search-input:focus {
   outline: none;
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+}
+
+.search-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
 }
 
 .empty-state {
@@ -95,6 +162,7 @@
 .empty-icon {
   font-size: 3rem;
   margin-bottom: 1rem;
+  opacity: 0.4;
 }
 
 @media (max-width: 768px) {
@@ -102,7 +170,29 @@
     padding: 1.5rem 1rem;
   }
 
+  .admin-header,
+  .manager-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tabs {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .tab-button {
+    flex: 1;
+    text-align: center;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
   .manager-content {
     grid-template-columns: 1fr;
+  }
+
+  .manager-panel {
+    padding: 1.25rem;
   }
 }

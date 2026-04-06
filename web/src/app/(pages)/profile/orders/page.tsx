@@ -8,7 +8,9 @@ export const metadata: Metadata = {
 
 export default function OrdersPage() {
   return (
-    <div className="container py-8">
+    <div
+      style={{ maxWidth: "1100px", margin: "0 auto", padding: "2rem 1.5rem" }}
+    >
       <OrdersClient />
     </div>
   );

@@ -1,97 +1,111 @@
-.product-actions {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
+/* ══════════════════════════════════════════
+   Product Actions (edit, delete, approve/reject)
+   ══════════════════════════════════════════ */
 
-.product-action-btn {
-  padding: 0.75rem 1.5rem;
-  background: var(--color-primary);
-  color: var(--text-white);
-  border: none;
-  border-radius: 0.5rem;
-  font-weight: 600;
+/* ── Action links and buttons ── */
+.prd-action-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-light);
+  border-radius: 0.4rem;
   cursor: pointer;
   transition: all 200ms ease;
+  text-decoration: none;
 }
 
-.product-action-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2);
+.prd-action-edit {
+  color: var(--color-primary);
 }
 
-.product-action-btn.secondary {
-  background: var(--bg-surface-2);
-  color: var(--text-light);
-  border: 1px solid var(--border-light);
-}
-
-.product-action-btn.secondary:hover {
+.prd-action-edit:hover {
   border-color: var(--color-primary);
-  background: rgba(var(--primary-rgb), 0.1);
+  background: rgba(var(--color-primary-rgb), 0.08);
 }
 
-.product-action-btn.danger {
-  background: var(--color-error);
+/* ── Lucide icons inside action buttons ── */
+.actions {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
-.product-action-btn.danger:hover {
-  box-shadow: 0 4px 12px rgba(var(--error-rgb), 0.2);
+.actions.edit {
+  color: var(--color-primary);
 }
 
-.product-action-menu {
-  position: relative;
-  display: inline-block;
+.actions.approve {
+  color: var(--color-success);
 }
 
-.product-action-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: var(--bg-surface-1);
-  border: 1px solid var(--border-light);
-  border-radius: 0.5rem;
-  min-width: 200px;
-  box-shadow: 0 8px 24px rgba(var(--shadow-rgb), 0.2);
-  z-index: 10;
-}
-
-.product-action-item {
-  padding: 0.75rem 1rem;
-  cursor: pointer;
-  transition: all 200ms ease;
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: none;
-  border: none;
-  color: var(--text-light);
-  font-size: 0.95rem;
-}
-
-.product-action-item:first-child {
-  border-radius: 0.375rem 0.375rem 0 0;
-}
-
-.product-action-item:last-child {
-  border-radius: 0 0 0.375rem 0.375rem;
-}
-
-.product-action-item:hover {
-  background: var(--bg-surface-2);
-}
-
-.product-action-item.danger {
+.actions.reject {
   color: var(--color-error);
 }
 
+.actions.trash {
+  color: var(--color-error);
+}
+
+/* ── Inline action buttons (approve/reject/delete) ── */
+.space-x-2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.space-x-2 button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-light);
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 200ms ease;
+  padding: 0;
+}
+
+.space-x-2 button:hover {
+  transform: translateY(-1px);
+}
+
+.space-x-2 button.text-green-500 {
+  color: var(--color-success);
+}
+
+.space-x-2 button.text-green-500:hover {
+  border-color: var(--color-success);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.space-x-2 button.text-red-500 {
+  color: var(--color-error);
+}
+
+.space-x-2 button.text-red-500:hover {
+  border-color: var(--color-error);
+  background: rgba(var(--color-error-rgb), 0.08);
+}
+
+/* ── Responsive ── */
 @media (max-width: 768px) {
-  .product-actions {
-    gap: 0.5rem;
+  .space-x-2 {
+    gap: 0.35rem;
   }
 
-  .product-action-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
+  .space-x-2 button,
+  .prd-action-link {
+    width: 28px;
+    height: 28px;
+  }
+
+  .actions {
+    width: 14px;
+    height: 14px;
   }
 }

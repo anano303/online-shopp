@@ -1,24 +1,26 @@
 /* ============================================================
-   Brand Logos — Static grid of partner cards
+   Brand Logos — Partner cards with clean grid
    ============================================================ */
 
 .bl-section {
   width: min(1360px, calc(100% - 2rem));
   margin: 3rem auto;
+  padding: 2rem 0;
 }
 
 /* ── Header ── */
 .bl-header {
   margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .bl-badge {
   display: inline-block;
-  padding: 0.35rem 0.9rem;
+  padding: 0.45rem 1.2rem;
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   background: rgba(var(--color-primary-rgb), 0.1);
   color: var(--color-primary);
@@ -28,8 +30,8 @@
 /* ── Grid ── */
 .bl-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 1rem;
 }
 
 /* ── Card ── */
@@ -37,7 +39,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   padding: 1.25rem 0.75rem 1rem;
   border-radius: 0.75rem;
   background: var(--bg-surface-1);
@@ -73,12 +75,12 @@
 
 /* ── Logo box ── */
 .bl-logo-box {
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem;
+  border-radius: 50%;
   background: var(--bg-surface-2);
   border: 1px solid var(--border-light);
   flex-shrink: 0;
@@ -92,10 +94,10 @@
 }
 
 .bl-logo-img {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
-  opacity: 0.8;
+  opacity: 0.85;
   transition: opacity 200ms ease;
 }
 
@@ -105,7 +107,7 @@
 
 /* ── Text ── */
 .bl-name {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--text-light);
   text-align: center;
@@ -131,40 +133,46 @@
 
 /* ── Skeleton loading ── */
 .bl-skeleton {
-  min-height: 130px;
+  min-height: 110px;
   background: var(--bg-surface-1);
   animation: bl-pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes bl-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .bl-section {
     margin: 2rem auto;
+    padding: 1rem 0;
   }
 
   .bl-grid {
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.6rem;
   }
 
   .bl-card {
-    padding: 1rem 0.5rem 0.75rem;
-    gap: 0.5rem;
+    padding: 0.9rem 0.5rem 0.75rem;
+    gap: 0.4rem;
   }
 
   .bl-logo-box {
-    width: 52px;
-    height: 52px;
+    width: 46px;
+    height: 46px;
   }
 
   .bl-logo-img {
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
   }
 
   .bl-name {
@@ -175,7 +183,7 @@
 @media (max-width: 480px) {
   .bl-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.4rem;
+    gap: 0.5rem;
   }
 
   .bl-card {
@@ -184,20 +192,12 @@
   }
 
   .bl-logo-box {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
   }
 
   .bl-logo-img {
-    width: 32px;
-    height: 32px;
-  }
-
-  .bl-name {
-    font-size: 0.65rem;
-  }
-
-  .bl-count {
-    display: none;
+    width: 28px;
+    height: 28px;
   }
 }

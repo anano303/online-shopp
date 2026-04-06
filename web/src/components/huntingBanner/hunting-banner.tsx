@@ -244,7 +244,7 @@ export const HuntingBanner: React.FC = () => {
 
   // Get banner data from database only
   const getBannerData = (
-    index: number
+    index: number,
   ): (BannerFormData & { _id?: string }) | null => {
     if (banners[index]) {
       return {
@@ -263,7 +263,7 @@ export const HuntingBanner: React.FC = () => {
   const handleSaveBanner = async (
     index: number,
     data: BannerFormData,
-    file?: File
+    file?: File,
   ) => {
     setIsSaving(true);
     try {
@@ -280,7 +280,7 @@ export const HuntingBanner: React.FC = () => {
         const result = await updateBanner(
           banner._id,
           bannerDataWithoutId,
-          file
+          file,
         );
         if (result.success) {
           await loadBanners();
@@ -297,7 +297,7 @@ export const HuntingBanner: React.FC = () => {
             sortOrder: index,
             type: BannerType.HUNTING,
           },
-          file
+          file,
         );
         if (result.success) {
           await loadBanners();

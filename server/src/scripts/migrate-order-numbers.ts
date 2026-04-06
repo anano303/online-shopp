@@ -9,7 +9,7 @@ import {
   OrderNumberCounterDocument,
 } from '../orders/schemas/order.schema';
 
-const ORDER_NUMBER_PREFIX = 'SSBB';
+const ORDER_NUMBER_PREFIX = 'SHOP';
 const ORDER_NUMBER_PAD_LENGTH = 5;
 const ORDER_NUMBER_REGEX = new RegExp(
   `^${ORDER_NUMBER_PREFIX}\\d{${ORDER_NUMBER_PAD_LENGTH}}$`,

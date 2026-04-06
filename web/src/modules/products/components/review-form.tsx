@@ -163,7 +163,7 @@ export function ReviewForm({ productId, onSuccess }: ReviewFormProps) {
 
       if (isBadRequestError) {
         console.log(
-          "Bad Request (400) detected - assuming 'only purchased products' error"
+          "Bad Request (400) detected - assuming 'only purchased products' error",
         );
         toast({
           title: "შეზღუდული წვდომა / Access Restricted",
@@ -193,7 +193,7 @@ export function ReviewForm({ productId, onSuccess }: ReviewFormProps) {
         // Check for string messages about purchased products
         (typeof errorMessage === "string" &&
           (errorMessage.includes(
-            "You can only review products you have purchased"
+            "You can only review products you have purchased",
           ) ||
             errorMessage.includes("only review") ||
             errorMessage.includes("purchased"))) ||

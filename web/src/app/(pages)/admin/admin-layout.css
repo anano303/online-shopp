@@ -1,0 +1,35 @@
+/* ══════════════════════════════════════════
+   Admin Layout — Clean wrapper
+   ══════════════════════════════════════════ */
+
+.admin-wrapper {
+  min-height: calc(100vh - 160px);
+  background: var(--bg-body);
+}
+
+/* ── Loading state ── */
+.admin-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.admin-loading-spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid var(--border-light);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: admin-spin 0.7s linear infinite;
+}
+
+@keyframes admin-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

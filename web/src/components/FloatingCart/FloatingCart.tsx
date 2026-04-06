@@ -65,7 +65,7 @@ export function FloatingCart() {
     const left = Math.max(0, Math.min(window.innerWidth - 60, newLeft));
     const bottom = Math.max(
       0,
-      Math.min(window.innerHeight - 60, window.innerHeight - newTop - 60)
+      Math.min(window.innerHeight - 60, window.innerHeight - newTop - 60),
     );
 
     setPosition({ bottom, left });
@@ -101,7 +101,7 @@ export function FloatingCart() {
     const left = Math.max(0, Math.min(window.innerWidth - 60, newLeft));
     const bottom = Math.max(
       0,
-      Math.min(window.innerHeight - 60, window.innerHeight - newTop - 60)
+      Math.min(window.innerHeight - 60, window.innerHeight - newTop - 60),
     );
 
     setPosition({ bottom, left });
@@ -140,7 +140,7 @@ export function FloatingCart() {
   // Calculate total price from items
   const totalPrice = items.reduce(
     (sum, item) => sum + item.price * item.qty,
-    0
+    0,
   );
 
   const handleGoToCart = () => {
@@ -244,7 +244,10 @@ export function FloatingCart() {
                         }}
                       >
                         <span
-                          style={{ color: "var(--text-secondary)", fontSize: "12px" }}
+                          style={{
+                            color: "var(--text-secondary)",
+                            fontSize: "12px",
+                          }}
                         >
                           No Image
                         </span>
@@ -267,7 +270,7 @@ export function FloatingCart() {
                             item.qty - 1,
                             item.size,
                             item.color,
-                            item.ageGroup
+                            item.ageGroup,
                           )
                         }
                         disabled={item.qty <= 1}
@@ -283,7 +286,7 @@ export function FloatingCart() {
                             item.qty + 1,
                             item.size,
                             item.color,
-                            item.ageGroup
+                            item.ageGroup,
                           )
                         }
                         className="qty-btn"
@@ -300,7 +303,7 @@ export function FloatingCart() {
                         item.productId,
                         item.size,
                         item.color,
-                        item.ageGroup
+                        item.ageGroup,
                       )
                     }
                   >

@@ -5,11 +5,10 @@ import Link from "next/link";
 import { useLanguage } from "@/hooks/LanguageContext";
 import { fetchActiveBanners } from "@/lib/banner-api";
 import { Banner } from "@/types/banner";
-import CategoryNavigation from "@/components/CategoryNavigation/CategoryNavigation";
 import "./homePagesHead.css";
 
 const HomePagesHead = () => {
-  const { language, t } = useLanguage(); // 👉 აქ ერთში მოვქციე
+  const { language } = useLanguage();
   const [banners, setBanners] = useState<Banner[]>([]);
   const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -48,7 +47,7 @@ const HomePagesHead = () => {
 
   const prevBanner = useCallback(() => {
     setCurrentBannerIndex(
-      (prev) => (prev - 1 + banners.length) % banners.length
+      (prev) => (prev - 1 + banners.length) % banners.length,
     );
   }, [banners.length]);
 
@@ -119,7 +118,7 @@ const HomePagesHead = () => {
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {/* Dynamic banner content */}
+        {/* Banner content: title + CTA centered vertically */}
         {currentBanner && (
           <div className="banner-content">
             <h1 className="banner-title">
@@ -169,19 +168,6 @@ const HomePagesHead = () => {
             </div>
           </>
         )}
-
-        {/* Action buttons */}
-        <div className="action-buttons">
-          <Link href="/register" className="registration-btn">
-            <span className="btn-text">{t("auth.register")}</span>
-          </Link>
-          <Link href="/login" className="auth-btn">
-            <span className="btn-text">{t("auth.login")}</span>
-          </Link>
-        </div>
-
-        {/* CategoryNavigation */}
-        <CategoryNavigation />
       </div>
     </div>
   );

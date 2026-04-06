@@ -42,7 +42,9 @@
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
-  transition: color 200ms ease, transform 200ms ease;
+  transition:
+    color 200ms ease,
+    transform 200ms ease;
   display: inline-block;
 }
 
@@ -201,7 +203,9 @@
   cursor: pointer;
   padding: 0 0.25rem;
   opacity: 0;
-  transition: opacity 200ms ease, color 200ms ease;
+  transition:
+    opacity 200ms ease,
+    color 200ms ease;
   vertical-align: middle;
 }
 

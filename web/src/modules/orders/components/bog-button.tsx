@@ -27,7 +27,7 @@ export function BOGButton({ orderId, amount, orderNumber }: BOGButtonProps) {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (!orderResponse.ok) {
@@ -83,7 +83,7 @@ export function BOGButton({ orderId, amount, orderNumber }: BOGButtonProps) {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(paymentData),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -115,7 +115,8 @@ export function BOGButton({ orderId, amount, orderNumber }: BOGButtonProps) {
         fontSize: "18px",
         letterSpacing: "0.5px",
         color: "var(--text-dark)",
-        backgroundColor: "color-mix(in srgb, var(--color-error), var(--text-white) 82%)",
+        backgroundColor:
+          "color-mix(in srgb, var(--color-error), var(--text-white) 82%)",
         width: "100%",
         padding: "12px 24px",
         border: "1px solid var(--color-error)",

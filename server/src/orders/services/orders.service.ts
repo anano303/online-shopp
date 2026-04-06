@@ -25,7 +25,7 @@ import axios from 'axios';
 @Injectable()
 export class OrdersService {
   private readonly logger = new Logger(OrdersService.name);
-  private static readonly ORDER_NUMBER_PREFIX = 'SSBB';
+  private static readonly ORDER_NUMBER_PREFIX = 'SHOP';
   private static readonly ORDER_NUMBER_PAD_LENGTH = 5;
 
   constructor(

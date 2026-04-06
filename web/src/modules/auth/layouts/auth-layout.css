@@ -1,10 +1,11 @@
 .auth-layout {
-  background: var(--bg-auth);
-  min-height: 100vh;
+  background: var(--bg-body);
+  min-height: 80vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem 1rem;
   position: relative;
   overflow: hidden;
 }
@@ -12,23 +13,26 @@
 .auth-layout::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
   background: radial-gradient(
-      100% 253.65% at 100% 0%,
-      var(--bg-auth) 5%,
-      var(--color-primary) 50.11%,
-      var(--bg-auth) 86.44%
-    )
-    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-
-  z-index: 1;
+    circle at 30% 30%,
+    rgba(var(--color-primary-rgb), 0.06) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 70% 70%,
+    rgba(var(--color-accent-rgb), 0.04) 0%,
+    transparent 50%
+  );
+  z-index: 0;
 }
 
 .auth-layout-inner {
   width: 100%;
+  max-width: 440px;
   position: relative;
   z-index: 2;
 }
@@ -41,20 +45,17 @@
 }
 
 .auth-layout-title {
-  color: var(--text-light); /* Lighter color */
-  font-size: 32px;
-  font-weight: 600;
+  color: var(--text-light);
+  font-size: 1.8rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
   text-align: center;
-  font-family: "FiraGo", sans-serif;
-  text-shadow: 1px 1px 3px rgba(var(--shadow-rgb), 0.5);
 }
 
 .auth-layout-subtitle {
   color: var(--text-secondary);
   text-align: center;
   margin-bottom: 1rem;
-  font-family: "FiraGo", sans-serif;
 }
 
 .auth-layout-children {

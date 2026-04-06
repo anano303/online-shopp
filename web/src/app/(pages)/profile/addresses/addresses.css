@@ -1,4 +1,5 @@
-.addresses-container {
+/* ── Addresses Page ── */
+.addresses-page {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
@@ -9,107 +10,26 @@
   margin-bottom: 2rem;
 }
 
-.addresses-title {
-  font-size: 1.8rem;
-  font-weight: 700;
+.addresses-header h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
   color: var(--text-light);
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.addresses-header p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
   margin: 0;
 }
 
-.addresses-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.address-card {
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  background: var(--bg-surface-1);
-  border: 1px solid var(--border-light);
-  transition: all 300ms ease;
-}
-
-.address-card:hover {
-  border-color: var(--color-primary);
-  box-shadow: 0 8px 16px rgba(var(--color-primary-rgb), 0.15);
-}
-
-.address-label {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  background: rgba(var(--color-primary-rgb), 0.1);
-  color: var(--color-primary);
-  border-radius: 0.25rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.address-content {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-.address-actions {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.address-button {
-  flex: 1;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--border-light);
-  border-radius: 0.5rem;
-  background: var(--bg-surface-2);
-  color: var(--text-light);
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.85rem;
-  transition: all 200ms ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.address-button:hover {
-  border-color: var(--color-primary);
-  background: rgba(var(--color-primary-rgb), 0.1);
-}
-
-.add-address-button {
-  grid-column: 1 / -1;
-  padding: 2rem;
-  border: 2px dashed var(--border-light);
-  border-radius: 0.75rem;
-  background: transparent;
-  color: var(--text-secondary);
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 200ms ease;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-}
-
-.add-address-button:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
-
 @media (max-width: 768px) {
-  .addresses-container {
+  .addresses-page {
     padding: 1.5rem 1rem;
   }
 
-  .addresses-list {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  .addresses-header h1 {
+    font-size: 1.3rem;
   }
 }

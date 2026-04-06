@@ -80,7 +80,7 @@ export function ProductGrid({
     queryFn: async () => {
       try {
         const response = await fetchWithAuth(
-          "/categories?includeInactive=false"
+          "/categories?includeInactive=false",
         );
         return response.json();
       } catch (err) {
@@ -96,7 +96,7 @@ export function ProductGrid({
     queryFn: async () => {
       try {
         const response = await fetchWithAuth(
-          "/subcategories?includeInactive=false"
+          "/subcategories?includeInactive=false",
         );
         return response.json();
       } catch (err) {
@@ -125,7 +125,7 @@ export function ProductGrid({
           const { items = [], pages: totalPages } = await getProducts(
             currentPage,
             10,
-            searchKeyword ? { keyword: searchKeyword } : undefined
+            searchKeyword ? { keyword: searchKeyword } : undefined,
           );
 
           if (!items || items.length === 0) {
@@ -270,7 +270,7 @@ export function ProductGrid({
               >
                 {pageNum}
               </button>
-            )
+            ),
           )}
 
           <button

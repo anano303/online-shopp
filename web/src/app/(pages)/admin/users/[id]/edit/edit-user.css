@@ -5,6 +5,48 @@
   padding: 2rem 1.5rem;
 }
 
+.edit-user-form,
+.form-section {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-light);
+}
+
+.edit-user-form .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.edit-user-form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--text-light);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.edit-user-form input,
+.edit-user-form select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+  background: var(--bg-surface-3);
+  color: var(--text-light);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 200ms ease;
+  box-sizing: border-box;
+}
+
+.edit-user-form input:focus,
+.edit-user-form select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+}
+
 .page-header {
   display: flex;
   align-items: center;
@@ -118,11 +160,12 @@
   border-top: 1px solid var(--border-light);
 }
 
-.submit-button {
+.submit-button,
+.save-button {
   flex: 1;
   padding: 0.75rem 2rem;
   background: var(--color-primary-gradient);
-  color: var(--text-white);
+  color: #fff;
   border: none;
   border-radius: 0.5rem;
   font-weight: 700;
@@ -131,9 +174,46 @@
   font-size: 0.95rem;
 }
 
-.submit-button:hover {
+.submit-button:hover,
+.save-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(var(--color-primary-rgb), 0.3);
+}
+
+/* ── Password buttons ── */
+.password-button {
+  padding: 0.55rem 1.25rem;
+  background: var(--bg-surface-2);
+  color: var(--text-light);
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 200ms ease;
+  font-size: 0.85rem;
+}
+
+.password-button:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: rgba(var(--color-primary-rgb), 0.05);
+}
+
+.cancel-password-button {
+  padding: 0.55rem 1.25rem;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 200ms ease;
+  font-size: 0.85rem;
+}
+
+.cancel-password-button:hover {
+  border-color: var(--color-error);
+  color: var(--color-error);
 }
 
 .cancel-button {

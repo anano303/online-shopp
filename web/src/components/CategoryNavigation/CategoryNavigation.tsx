@@ -9,20 +9,64 @@ import "./CategoryNavigation.css";
 // Returns emoji icon based on category name
 const getCategoryEmoji = (category: any): string => {
   // Use emoji from API if it looks like one (short, non-URL string)
-  if (category.icon && !category.icon.startsWith("/") && !category.icon.startsWith("http")) {
+  if (
+    category.icon &&
+    !category.icon.startsWith("/") &&
+    !category.icon.startsWith("http")
+  ) {
     return category.icon;
   }
 
   const name = (category.name || "").toLowerCase();
 
-  if (name.includes("ნადირობა") || name.includes("hunting") || name.includes("rifle")) return "🎯";
-  if (name.includes("საბრძოლო") || name.includes("ammunition") || name.includes("ammo")) return "💥";
-  if (name.includes("დასვენება") || name.includes("camping") || name.includes("camp")) return "⛺";
-  if (name.includes("თევზაობა") || name.includes("fishing") || name.includes("fish")) return "🎣";
-  if (name.includes("ტანსაცმელი") || name.includes("clothing") || name.includes("clothes")) return "👕";
-  if (name.includes("ფეხსაცმელი") || name.includes("footwear") || name.includes("shoe")) return "👟";
-  if (name.includes("საცურაო") || name.includes("swim") || name.includes("water")) return "🏊";
-  if (name.includes("აქსესუარები") || name.includes("accessories") || name.includes("gear")) return "🎒";
+  if (
+    name.includes("ნადირობა") ||
+    name.includes("hunting") ||
+    name.includes("rifle")
+  )
+    return "🎯";
+  if (
+    name.includes("საბრძოლო") ||
+    name.includes("ammunition") ||
+    name.includes("ammo")
+  )
+    return "💥";
+  if (
+    name.includes("დასვენება") ||
+    name.includes("camping") ||
+    name.includes("camp")
+  )
+    return "⛺";
+  if (
+    name.includes("თევზაობა") ||
+    name.includes("fishing") ||
+    name.includes("fish")
+  )
+    return "🎣";
+  if (
+    name.includes("ტანსაცმელი") ||
+    name.includes("clothing") ||
+    name.includes("clothes")
+  )
+    return "👕";
+  if (
+    name.includes("ფეხსაცმელი") ||
+    name.includes("footwear") ||
+    name.includes("shoe")
+  )
+    return "👟";
+  if (
+    name.includes("საცურაო") ||
+    name.includes("swim") ||
+    name.includes("water")
+  )
+    return "🏊";
+  if (
+    name.includes("აქსესუარები") ||
+    name.includes("accessories") ||
+    name.includes("gear")
+  )
+    return "🎒";
   if (name.includes("სპორტი") || name.includes("sport")) return "⚽";
   if (name.includes("ელექტრო") || name.includes("electronic")) return "⚡";
   if (name.includes("სახლი") || name.includes("home")) return "🏠";

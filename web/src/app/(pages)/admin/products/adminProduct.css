@@ -1,81 +1,35 @@
-.admin-products-container {
+/* ══════════════════════════════════════════
+   Admin Products Page
+   ══════════════════════════════════════════ */
+
+.admin-products-container,
+.responsive-container {
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
 
-.products-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
+/* ── Create Product Page container ── */
+.createProductPage {
+  padding: 1rem 1.5rem 3rem;
 }
 
-.products-title {
+.createProductPage h1 {
   font-size: 1.8rem;
   font-weight: 800;
   color: var(--text-light);
-  margin: 0;
+  margin: 0 0 1.5rem;
 }
 
-.header-actions {
+/* ── Loading container for auth check ── */
+.loading-container {
   display: flex;
-  gap: 1rem;
+  justify-content: center;
   align-items: center;
-}
-
-.add-product-btn {
-  padding: 0.75rem 1.5rem;
-  background: var(--color-primary-gradient);
-  color: var(--text-white);
-  border: none;
-  border-radius: 0.5rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 200ms ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
+  min-height: 300px;
+  color: var(--text-secondary);
   font-size: 0.95rem;
-}
-
-.add-product-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(var(--color-primary-rgb), 0.3);
-}
-
-.filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  background: var(--bg-surface-1);
-  border: 1px solid var(--border-light);
-}
-
-.search-input {
-  flex: 1;
-  min-width: 200px;
-  padding: 0.6rem 1rem;
-  border: 1px solid var(--border-light);
-  border-radius: 0.5rem;
-  background: var(--bg-surface-2);
-  color: var(--text-light);
-  font-family: inherit;
-  font-size: 0.9rem;
-  transition: all 200ms ease;
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
 }
 
 .filter-select {

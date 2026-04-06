@@ -370,14 +370,10 @@ export function ProductsList() {
                     {hasActiveDiscount(product) ? (
                       <div className="admin-products-price-display">
                         <span className="admin-products-price-row">
-                          <span
-                            className="admin-products-discounted-price"
-                          >
+                          <span className="admin-products-discounted-price">
                             {calculateDiscountedPrice(product).toFixed(2)} ₾
                           </span>
-                          <span
-                            className="admin-products-discount-badge"
-                          >
+                          <span className="admin-products-discount-badge">
                             -{product.discountPercentage}%
                           </span>
                         </span>

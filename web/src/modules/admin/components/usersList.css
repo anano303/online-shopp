@@ -1,114 +1,187 @@
-.users-list {
+/* ── Outer card ── */
+.usr-card {
   background: var(--bg-surface-1);
   border-radius: 1rem;
   border: 1px solid var(--border-light);
   overflow: hidden;
-}
-
-.users-list-header {
-  background: var(--bg-surface-2);
   padding: 1.5rem;
-  border-bottom: 1px solid var(--border-light);
 }
 
-.users-list-title {
+/* ── Header row ── */
+.usr-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.usr-title {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-light);
   margin: 0;
 }
 
-.users-list-table {
+/* ── Create user button ── */
+.create-user-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.25rem;
+  background: var(--color-primary-gradient, var(--color-primary));
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+.create-user-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.3);
+}
+
+/* ── Table ── */
+.usr-table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 0.875rem;
+  overflow: hidden;
+  border-radius: 0.625rem;
+  border: 1px solid var(--border-light);
 }
 
-.users-list-thead {
+.usr-thead-row {
   background: var(--bg-surface-2);
 }
 
-.users-list-th {
-  padding: 1rem 1.5rem;
+.usr-th {
+  padding: 0.875rem 1rem;
   text-align: left;
-  color: var(--text-light);
-  font-weight: 600;
-  border-bottom: 1px solid var(--border-light);
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--border-light);
+  white-space: nowrap;
 }
 
-.users-list-td {
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--border-light);
-  color: var(--text-light);
+.usr-th-right {
+  text-align: right;
 }
 
-.users-list-tbody tr {
-  transition: background 200ms ease;
+.usr-tr {
+  transition: background 150ms ease;
 }
-
-.users-list-tbody tr:hover {
+.usr-tr:hover {
   background: var(--bg-surface-2);
 }
 
-.users-list-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--color-primary);
-  color: var(--text-white);
-  display: flex;
+.usr-td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-light);
+  vertical-align: middle;
+}
+
+.usr-td-bold {
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.usr-td-right {
+  text-align: right;
+}
+
+/* ── Role badges ── */
+.usr-badge-admin,
+.usr-badge-seller,
+.usr-badge {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  font-weight: 700;
+  gap: 0.3rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.775rem;
+  font-weight: 600;
+}
+
+.usr-badge-admin {
+  background: rgba(var(--color-primary-rgb), 0.12);
+  color: var(--color-primary);
+}
+
+.usr-badge-seller {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+}
+
+.usr-badge {
+  background: rgba(var(--shadow-rgb), 0.07);
+  color: var(--text-secondary);
+}
+
+/* ── Icon inside badge/button ── */
+.usr-icon {
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
 }
 
-.users-list-status {
-  display: inline-block;
-  padding: 0.375rem 0.75rem;
-  border-radius: 0.375rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.users-list-status.active {
-  background: var(--bg-success);
-  color: var(--color-success);
-}
-
-.users-list-status.inactive {
-  background: var(--bg-error);
-  color: var(--color-error);
-}
-
-.users-list-actions {
+/* ── Action buttons ── */
+.usr-actions {
   display: flex;
   gap: 0.5rem;
+  justify-content: flex-end;
 }
 
-.users-list-btn {
-  padding: 0.375rem 0.75rem;
-  background: var(--bg-surface-3);
-  color: var(--text-light);
+.usr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--bg-surface-2);
+  color: var(--text-secondary);
   border: 1px solid var(--border-light);
-  border-radius: 0.375rem;
+  border-radius: 0.4rem;
   cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: 600;
   transition: all 200ms ease;
 }
-
-.users-list-btn:hover {
+.usr-btn:hover {
   border-color: var(--color-primary);
-  background: rgba(var(--primary-rgb), 0.1);
+  color: var(--color-primary);
+  background: rgba(var(--color-primary-rgb), 0.07);
 }
 
+.usr-btn-danger {
+  color: var(--color-error, #dc2626);
+}
+.usr-btn-danger:hover {
+  border-color: var(--color-error, #dc2626);
+  color: var(--color-error, #dc2626);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+/* ── Responsive ── */
 @media (max-width: 768px) {
-  .users-list-th,
-  .users-list-td {
-    padding: 0.75rem;
+  .usr-th,
+  .usr-td {
+    padding: 0.625rem 0.625rem;
+    font-size: 0.8rem;
   }
 
-  .users-list-table {
-    font-size: 0.875rem;
+  .usr-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
   }
 }

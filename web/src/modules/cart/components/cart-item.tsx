@@ -3,10 +3,11 @@ import { useCart } from "../context/cart-context";
 import { useLanguage } from "@/hooks/LanguageContext";
 import { useQuery } from "@tanstack/react-query";
 import { fetchWithAuth } from "@/lib/fetch-with-auth";
-import { Color, AgeGroupItem } from "@/types";
+import { Color, AgeGroupItem, ProductVariant } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { formatPrice } from "@/lib/utils";
+import { useState } from "react";
 import "./cart-item.css";
 
 // Helper function to check if image is from Cloudinary
@@ -22,8 +23,12 @@ export function CartItem({
   item,
   getLocalizedColorName: propGetLocalizedColorName,
 }: CartItemProps) {
-  const { updateQuantity, removeItem } = useCart();
+  const { updateQuantity, removeItem, addToCart } = useCart();
   const { t, language } = useLanguage();
+  const [isEditing, setIsEditing] = useState(false);
+  const [editSize, setEditSize] = useState(item.size || "");
+  const [editColor, setEditColor] = useState(item.color || "");
+  const [editAgeGroup, setEditAgeGroup] = useState(item.ageGroup || "");
 
   // Fetch all colors for proper nameEn support (only if not provided via props)
   const { data: availableColors = [] } = useQuery<Color[]>({
@@ -50,7 +55,7 @@ export function CartItem({
     queryFn: async () => {
       try {
         const response = await fetchWithAuth(
-          "/categories/attributes/age-groups"
+          "/categories/attributes/age-groups",
         );
         if (!response.ok) {
           return [];
@@ -62,6 +67,24 @@ export function CartItem({
     },
     retry: 1,
     refetchOnWindowFocus: false,
+  });
+
+  // Fetch product variants when editing
+  const { data: productData } = useQuery<{
+    variants?: ProductVariant[];
+    sizes?: string[];
+    colors?: string[];
+    ageGroups?: string[];
+  }>({
+    queryKey: ["product-variants", item.productId],
+    queryFn: async () => {
+      const response = await fetchWithAuth(`/products/${item.productId}`);
+      if (!response.ok) return {};
+      return response.json();
+    },
+    enabled: isEditing,
+    retry: 1,
+    refetchOnWindowFocus: false,
   }); // Get localized color name based on current language (exact same logic as product-details.tsx)
   const getLocalizedColorName =
     propGetLocalizedColorName ||
@@ -69,7 +92,7 @@ export function CartItem({
       if (language === "en") {
         // Find the color in availableColors to get its English name
         const colorObj = availableColors.find(
-          (color) => color.name === colorName
+          (color) => color.name === colorName,
         );
         return colorObj?.nameEn || colorName;
       }
@@ -80,7 +103,7 @@ export function CartItem({
     if (language === "en") {
       // Find the age group in availableAgeGroups to get its English name
       const ageGroupObj = availableAgeGroups.find(
-        (ageGroup) => ageGroup.name === ageGroupName
+        (ageGroup) => ageGroup.name === ageGroupName,
       );
       return ageGroupObj?.nameEn || ageGroupName;
     }
@@ -99,6 +122,64 @@ export function CartItem({
   // Function to handle item removal with variant information
   const handleRemoveItem = () => {
     removeItem(item.productId, item.size, item.color, item.ageGroup);
+  };
+
+  // Get available options from product variants
+  const getAvailableOptions = () => {
+    const variants = productData?.variants || [];
+    const sizes = new Set<string>();
+    const colors = new Set<string>();
+    const ageGroups = new Set<string>();
+
+    variants.forEach((v) => {
+      if (v.size) sizes.add(v.size);
+      if (v.color) colors.add(v.color);
+      if (v.ageGroup) ageGroups.add(v.ageGroup);
+    });
+
+    // Also use product-level arrays if available
+    if (productData?.sizes) productData.sizes.forEach((s) => sizes.add(s));
+    if (productData?.colors) productData.colors.forEach((c) => colors.add(c));
+    if (productData?.ageGroups)
+      productData.ageGroups.forEach((a) => ageGroups.add(a));
+
+    return {
+      sizes: Array.from(sizes),
+      colors: Array.from(colors),
+      ageGroups: Array.from(ageGroups),
+    };
+  };
+
+  const handleEditToggle = () => {
+    if (!isEditing) {
+      setEditSize(item.size || "");
+      setEditColor(item.color || "");
+      setEditAgeGroup(item.ageGroup || "");
+    }
+    setIsEditing(!isEditing);
+  };
+
+  const handleSaveEdit = async () => {
+    const sizeChanged = editSize !== (item.size || "");
+    const colorChanged = editColor !== (item.color || "");
+    const ageGroupChanged = editAgeGroup !== (item.ageGroup || "");
+
+    if (!sizeChanged && !colorChanged && !ageGroupChanged) {
+      setIsEditing(false);
+      return;
+    }
+
+    // Remove old item and add new one with updated attributes
+    await removeItem(item.productId, item.size, item.color, item.ageGroup);
+    await addToCart(
+      item.productId,
+      item.qty,
+      editSize || undefined,
+      editColor || undefined,
+      editAgeGroup || undefined,
+      item.price,
+    );
+    setIsEditing(false);
   };
 
   return (
@@ -148,26 +229,101 @@ export function CartItem({
             {item.price ? formatPrice(item.price) : "N/A"}
           </p>{" "}
           {/* Display variant information if available */}
-          {(item.size || item.color || item.ageGroup) && (
+          {(item.size || item.color || item.ageGroup) && !isEditing && (
             <div className="cart-item-variants">
-              {" "}
               {item.size && (
                 <span className="variant-tag">
                   {t("cart.size")}: {item.size}
                 </span>
               )}
-              <br />
               {item.color && (
                 <span className="variant-tag">
                   {t("cart.color")}: {getLocalizedColorName(item.color)}
                 </span>
               )}
-              <br />
               {item.ageGroup && (
                 <span className="variant-tag">
                   {t("cart.age")}: {getLocalizedAgeGroupName(item.ageGroup)}
                 </span>
               )}
+              <button
+                className="variant-edit-btn"
+                onClick={handleEditToggle}
+                title={language === "ge" ? "შეცვლა" : "Edit"}
+              >
+                ✎
+              </button>
+            </div>
+          )}
+          {/* Editing variant attributes */}
+          {isEditing && (
+            <div className="cart-item-edit-variants">
+              {(() => {
+                const options = getAvailableOptions();
+                return (
+                  <>
+                    {options.sizes.length > 0 && (
+                      <div className="edit-variant-field">
+                        <label>{t("cart.size")}</label>
+                        <select
+                          value={editSize}
+                          onChange={(e) => setEditSize(e.target.value)}
+                        >
+                          {options.sizes.map((s) => (
+                            <option key={s} value={s}>
+                              {s}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                    {options.colors.length > 0 && (
+                      <div className="edit-variant-field">
+                        <label>{t("cart.color")}</label>
+                        <select
+                          value={editColor}
+                          onChange={(e) => setEditColor(e.target.value)}
+                        >
+                          {options.colors.map((c) => (
+                            <option key={c} value={c}>
+                              {getLocalizedColorName(c)}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                    {options.ageGroups.length > 0 && (
+                      <div className="edit-variant-field">
+                        <label>{t("cart.age")}</label>
+                        <select
+                          value={editAgeGroup}
+                          onChange={(e) => setEditAgeGroup(e.target.value)}
+                        >
+                          {options.ageGroups.map((a) => (
+                            <option key={a} value={a}>
+                              {getLocalizedAgeGroupName(a)}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                    <div className="edit-variant-actions">
+                      <button
+                        className="edit-save-btn"
+                        onClick={handleSaveEdit}
+                      >
+                        {language === "ge" ? "შენახვა" : "Save"}
+                      </button>
+                      <button
+                        className="edit-cancel-btn"
+                        onClick={handleEditToggle}
+                      >
+                        {language === "ge" ? "გაუქმება" : "Cancel"}
+                      </button>
+                    </div>
+                  </>
+                );
+              })()}
             </div>
           )}
         </div>

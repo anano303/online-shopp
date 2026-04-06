@@ -23,8 +23,11 @@
   --error-rgb: var(--color-error-rgb);
 
   /* Fonts (from fonts.css) */
-  --font-geist-sans: "Fira Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-geist-mono: "Fira Code", "Monaco", "Consolas", "Ubuntu Mono", monospace;
+  --font-geist-sans:
+    "Fira Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-geist-mono:
+    "Fira Code", "Monaco", "Consolas", "Ubuntu Mono", monospace;
 
   --color-transparent: transparent;
   --bg-auth-rgb: 8, 51, 68;
@@ -252,39 +255,59 @@ main::-webkit-scrollbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 0.4rem;
+  margin-top: 2rem;
+  padding: 1rem 0;
 }
 
-.pagination-button {
-  padding: 8px 12px;
-  border: 1px solid var(--border-secondary);
-  border-radius: 4px;
+.pagination-button,
+.pagination-btn {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
   text-decoration: none;
-  color: var(--text-white);
-  font-size: 14px;
-  transition: background 0.3s;
-  background-color: var(--bg-surface-2);
+  color: var(--text-light);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 200ms ease;
+  background: var(--bg-surface-2);
+  cursor: pointer;
 }
 
-.pagination-button:hover {
-  background: var(--bg-input);
+.pagination-button:hover,
+.pagination-btn:hover {
+  border-color: var(--color-primary);
+  background: rgba(var(--color-primary-rgb), 0.1);
+  color: var(--color-primary);
 }
 
-.pagination-button.active {
-  background: var(--bg-elevated);
-  color: var(--text-white);
-  border-color: var(--bg-elevated);
+.pagination-button.active,
+.pagination-btn.active {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
 }
 
-.pagination-button.disabled {
+.pagination-button.disabled,
+.pagination-btn.disabled,
+.pagination-button:disabled,
+.pagination-btn:disabled {
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 .pagination-ellipsis {
-  font-size: 14px;
+  font-size: 0.85rem;
   color: var(--text-muted);
+  padding: 0 0.25rem;
+}
+
+/* Order detail page container */
+.orderPage {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .paint-trail {
@@ -442,49 +465,75 @@ main::-webkit-scrollbar {
   border-color: var(--border-secondary) !important;
 }
 
+/* ── Global button base styles ── */
 .btn-add,
 .btn-submit {
-  background: var(--color-primary) !important;
-  color: var(--text-white) !important;
-  border: 1px solid var(--color-primary) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  background: var(--color-primary-gradient) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 200ms ease;
 }
 
 .btn-add:hover,
 .btn-submit:hover {
-  background: color-mix(
-    in srgb,
-    var(--color-primary),
-    black var(--hover-darken-strength)
-  ) !important;
-  color: var(--text-white) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(var(--color-primary-rgb), 0.3) !important;
 }
 
 .btn-submit:disabled {
   background: var(--bg-surface-3) !important;
   color: var(--text-muted) !important;
   border-color: var(--border-secondary) !important;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .btn-cancel,
 .btn-edit,
 .btn-delete,
-.attribute-actions .btn-edit,
-.attribute-actions .btn-delete,
-.banner-btn-danger,
 .btn-secondary {
-  background: var(--bg-surface-3) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-surface-2) !important;
   color: var(--text-light) !important;
-  border: 1px solid var(--border-secondary) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 200ms ease;
 }
 
 .btn-cancel:hover,
 .btn-edit:hover,
-.btn-delete:hover,
-.attribute-actions .btn-edit:hover,
-.attribute-actions .btn-delete:hover,
-.banner-btn-danger:hover,
 .btn-secondary:hover {
-  background: var(--bg-elevated) !important;
-  color: var(--text-white) !important;
-  border-color: var(--border-light) !important;
+  border-color: var(--color-primary) !important;
+  background: rgba(var(--color-primary-rgb), 0.08) !important;
+  color: var(--color-primary) !important;
+}
+
+.btn-delete:hover,
+.banner-btn-danger:hover {
+  border-color: var(--color-error) !important;
+  background: rgba(var(--color-error-rgb), 0.08) !important;
+  color: var(--color-error) !important;
+}
+
+.attribute-actions .btn-edit,
+.attribute-actions .btn-delete,
+.banner-btn-danger {
+  background: var(--bg-surface-2) !important;
+  color: var(--text-light) !important;
+  border: 1px solid var(--border-light) !important;
 }

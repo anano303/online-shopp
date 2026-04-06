@@ -37,7 +37,11 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(var(--shadow-rgb), 0.8), transparent);
+  background: linear-gradient(
+    to top,
+    rgba(var(--shadow-rgb), 0.8),
+    transparent
+  );
   color: var(--text-white);
   padding: 2rem 1.5rem;
   text-align: center;

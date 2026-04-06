@@ -111,13 +111,7 @@ const BrandLogos = () => {
   const renderLogo = (brand: Brand) => {
     const src = brand.logo || noPhoto.src;
     if (isCloudinaryImage(src)) {
-      return (
-        <img
-          src={src}
-          alt={`${brand.name}`}
-          className="bl-logo-img"
-        />
-      );
+      return <img src={src} alt={`${brand.name}`} className="bl-logo-img" />;
     }
     return (
       <Image

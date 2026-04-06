@@ -1,63 +1,61 @@
-.register-form {
+/* ══════════════════════════════════════════
+   Register Form — Modern Auth Design
+   ══════════════════════════════════════════ */
+
+/* ── Wrapper ── */
+.register-content {
   width: 100%;
-  max-width: 400px;
+  max-width: 440px;
   margin: 0 auto;
-  padding: 2rem;
-  border-radius: 1rem;
+  padding: 2.5rem 2rem;
+  border-radius: 1.25rem;
   background: var(--bg-surface-1);
   border: 1px solid var(--border-light);
+  box-shadow: 0 12px 40px rgba(var(--shadow-rgb), 0.25);
 }
 
-.form-title {
-  font-size: 1.6rem;
+/* ── Title ── */
+.register-title {
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--text-light);
-  margin: 0 0 0.5rem;
+  margin: 0 0 1.75rem;
   text-align: center;
+  letter-spacing: -0.01em;
 }
 
-.form-subtitle {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  text-align: center;
-  margin: 0 0 2rem;
-}
-
-.progress-indicator {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-}
-
-.progress-step {
-  flex: 1;
-  height: 3px;
-  background: var(--border-light);
-  border-radius: 2px;
-  transition: background 200ms ease;
-}
-
-.progress-step.active {
-  background: var(--color-primary);
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: var(--text-light);
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.form-input {
-  width: 100%;
+/* ── Error banner ── */
+.register-error-message {
   padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  background: rgba(var(--color-error-rgb), 0.1);
+  border: 1px solid rgba(var(--color-error-rgb), 0.3);
+  border-radius: 0.6rem;
+  color: var(--color-error);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* ── Form ── */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Field ── */
+.register-field {
+  margin-bottom: 1rem;
+}
+
+.register-field input[type="text"],
+.register-field input[type="email"],
+.register-field input[type="password"] {
+  width: 100%;
+  padding: 0.8rem 1rem;
   border: 1px solid var(--border-light);
-  border-radius: 0.5rem;
+  border-radius: 0.6rem;
   background: var(--bg-surface-2);
   color: var(--text-light);
   font-family: inherit;
@@ -66,112 +64,244 @@
   box-sizing: border-box;
 }
 
-.form-input:focus {
+.register-field input[type="text"]:focus,
+.register-field input[type="email"]:focus,
+.register-field input[type="password"]:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.12);
+  background: var(--bg-surface-1);
 }
 
-.password-requirements {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-top: 0.5rem;
-  padding: 0.75rem;
-  background: var(--bg-surface-2);
-  border-radius: 0.4rem;
+.register-field input::placeholder {
+  color: var(--text-muted);
 }
 
-.requirement-item {
+/* ── Field error ── */
+.error-text {
+  color: var(--color-error);
+  font-size: 0.8rem;
+  margin: 0.35rem 0 0;
+  font-weight: 500;
+}
+
+/* ── Privacy/checkbox fields ── */
+.privacy-field {
+  margin-bottom: 0.6rem;
+}
+
+.privacy-checkbox-label {
   display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  cursor: pointer;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.privacy-checkbox {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.privacy-text {
+  color: var(--text-secondary);
+}
+
+.privacy-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 0.2rem;
+  transition: color 200ms ease;
+}
+
+.privacy-link:hover {
+  color: var(--color-primary-light);
+  text-decoration: underline;
+}
+
+/* ── Register button ── */
+.register-button {
+  width: 100%;
+  padding: 0.85rem;
+  margin-top: 0.5rem;
+  background: var(--color-primary-gradient);
+  color: #fff;
+  border: none;
+  border-radius: 0.6rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 200ms ease;
+  letter-spacing: 0.01em;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 
-.requirement-item:last-child {
-  margin-bottom: 0;
+.register-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(var(--color-primary-rgb), 0.35);
 }
 
-.requirement-icon {
+.register-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.register-loading {
   width: 16px;
   height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
   border-radius: 50%;
-  background: var(--border-light);
-  color: transparent;
+  animation: register-spin 0.6s linear infinite;
 }
 
-.requirement-icon.met {
-  background: var(--color-success);
-  color: var(--text-white);
+@keyframes register-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Divider ── */
+.register-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.register-divider::before,
+.register-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-light);
+}
+
+/* ── Social login — reuse from login ── */
+.social-login {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.social-button {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface-2);
+  color: var(--text-light);
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
-}
-
-.terms-agreement {
-  display: flex;
-  align-items: flex-start;
   gap: 0.75rem;
-  margin: 1.5rem 0;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.terms-link {
-  color: var(--color-primary);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.submit-button {
-  width: 100%;
-  padding: 0.75rem;
-  background: var(--color-accent-gradient);
-  color: var(--text-white);
-  border: none;
-  border-radius: 0.5rem;
-  font-weight: 700;
-  cursor: pointer;
   transition: all 200ms ease;
-  font-size: 0.95rem;
 }
 
-.submit-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(var(--color-accent-rgb), 0.3);
+.social-button:hover {
+  border-color: var(--color-primary);
+  background: rgba(var(--color-primary-rgb), 0.06);
+  transform: translateY(-1px);
 }
 
-.form-footer {
-  margin-top: 2rem;
+.google-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+}
+
+.google-brand {
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.google-blue { color: #4285F4; }
+.google-red { color: #EA4335; }
+.google-yellow { color: #FBBC05; }
+.google-green { color: #34A853; }
+
+/* ── Login prompt ── */
+.login-prompt {
+  margin-top: 1.5rem;
   text-align: center;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.88rem;
 }
 
-.form-footer-link {
+.login-link {
   color: var(--color-primary);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
+  margin-left: 0.25rem;
+  transition: color 200ms ease;
 }
 
-.error-message {
-  padding: 0.75rem 1rem;
-  background: rgba(var(--color-error), 0.1);
-  border: 1px solid var(--color-error);
-  border-radius: 0.5rem;
-  color: var(--color-error);
+.login-link:hover {
+  color: var(--color-primary-light);
+}
+
+/* ── Success state ── */
+.register-success {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.register-success-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  background: rgba(var(--color-primary-rgb), 0.12);
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.register-success-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin: 0 0 0.5rem;
+}
+
+.register-success-text {
+  color: var(--text-secondary);
   font-size: 0.9rem;
-  margin-bottom: 1.5rem;
+  margin: 0.25rem 0;
 }
 
-@media (max-width: 600px) {
-  .register-form {
-    margin: 1rem;
-    padding: 1.5rem 1rem;
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .register-content {
+    margin: 0 0.5rem;
+    padding: 2rem 1.25rem;
+    border-radius: 1rem;
   }
 
-  .form-title {
-    font-size: 1.4rem;
+  .register-title {
+    font-size: 1.5rem;
+  }
+
+  .register-field input[type="text"],
+  .register-field input[type="email"],
+  .register-field input[type="password"] {
+    font-size: 16px; /* Prevents iOS zoom */
   }
 }

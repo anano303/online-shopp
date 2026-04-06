@@ -51,7 +51,11 @@
 .search-back-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(var(--color-primary-rgb), 0.6);
-  background: color-mix(in srgb, var(--color-primary), black var(--hover-darken-strength));
+  background: color-mix(
+    in srgb,
+    var(--color-primary),
+    black var(--hover-darken-strength)
+  );
 }
 
 .search-title {
@@ -190,17 +194,20 @@
 .search-browse-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.6);
-  background: color-mix(in srgb, var(--color-primary), black var(--hover-darken-strength));
+  background: color-mix(
+    in srgb,
+    var(--color-primary),
+    black var(--hover-darken-strength)
+  );
 }
 
 /* Product grid container */
 .search-products-container {
-  padding: 30px;
-  backdrop-filter: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 /* Responsive Design - Enhanced Mobile Experience */
